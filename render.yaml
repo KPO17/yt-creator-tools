@@ -1,0 +1,37 @@
+services:
+  # Service Web (Backend Flask + Frontend statique)
+  - type: web
+    name: yt-creator-tools
+    env: python
+    region: frankfurt  # ou oregon, singapore selon votre localisation
+    plan: free  # Gratuit pour commencer
+    buildCommand: "pip install -r api/requirements.txt"
+    startCommand: "gunicorn -w 4 -b 0.0.0.0:$PORT api.app:app"
+    
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        generateValue: true
+    
+    # Configuration santé
+    healthCheckPath: /api/health
+    
+    # Headers de sécurité
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+    
+    # Domaines personnalisés (optionnel)
+    # domains:
+    #   - ytcreatortools.com
+    #   - www.ytcreatortools.com
