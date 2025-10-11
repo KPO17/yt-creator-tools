@@ -1,6 +1,7 @@
 import yt_dlp
 import re
 import json
+import time
 
 class SubtitleError(Exception):
     """Exception personnalisée pour les erreurs de sous-titres"""
@@ -8,22 +9,48 @@ class SubtitleError(Exception):
 
 def get_subtitles(video_id, format_type='txt', language='fr'):
     """
-    Récupère les sous-titres avec yt-dlp (plus fiable que youtube-transcript-api)
+    Récupère les sous-titres avec yt-dlp (avec contournement du bot detection)
     """
     try:
         url = f'https://www.youtube.com/watch?v={video_id}'
         
-        # Configuration yt-dlp
+        # Configuration yt-dlp optimisée pour éviter le bot detection
         ydl_opts = {
             'skip_download': True,
             'writesubtitles': True,
             'writeautomaticsub': True,
-            'subtitleslangs': [language, 'en'],
+            'subtitleslangs': [language, 'en', 'auto'],
             'quiet': True,
             'no_warnings': True,
+            
+            # Headers pour sembler humain
+            'http_headers': {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Cache-Control': 'max-age=0',
+            },
+            
+            # Pause entre les requêtes
+            'socket_timeout': 30,
+            'retries': 3,
+            
+            # Proxy rotationnel (optional - uncomment si vous avez des proxies)
+            # 'proxy': 'http://proxy.example.com:8080',
         }
         
+        print(f"[INFO] Extraction des sous-titres pour {video_id}...")
+        
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            # Ajouter un délai avant la requête
+            time.sleep(2)
+            
             info = ydl.extract_info(url, download=False)
             
             # Récupérer les sous-titres disponibles
@@ -36,6 +63,8 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             if not all_subs:
                 raise SubtitleError('Aucun sous-titre disponible pour cette vidéo')
             
+            print(f"[INFO] Langues trouvées: {list(all_subs.keys())}")
+            
             # Chercher la langue demandée
             selected_lang = None
             is_auto = False
@@ -43,24 +72,29 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             if language in subtitles:
                 selected_lang = language
                 subtitle_data = subtitles[language]
+                print(f"[INFO] Sous-titres trouvés en {language}")
             elif language in automatic_captions:
                 selected_lang = language
                 subtitle_data = automatic_captions[language]
                 is_auto = True
+                print(f"[INFO] Sous-titres auto-générés trouvés en {language}")
             elif 'en' in subtitles:
                 selected_lang = 'en'
                 subtitle_data = subtitles['en']
+                print(f"[INFO] Fallback en anglais (manuel)")
             elif 'en' in automatic_captions:
                 selected_lang = 'en'
                 subtitle_data = automatic_captions['en']
                 is_auto = True
+                print(f"[INFO] Fallback en anglais (auto-généré)")
             else:
                 # Prendre le premier disponible
                 selected_lang = list(all_subs.keys())[0]
                 subtitle_data = all_subs[selected_lang]
                 is_auto = selected_lang in automatic_captions
+                print(f"[INFO] Utilisation de {selected_lang}")
             
-            # Télécharger les sous-titres au format JSON3
+            # Trouver le format JSON3
             json3_format = None
             for fmt in subtitle_data:
                 if fmt.get('ext') == 'json3':
@@ -68,30 +102,40 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
                     break
             
             if not json3_format:
-                raise SubtitleError('Format de sous-titres non supporté')
+                raise SubtitleError('Format de sous-titres JSON3 non trouvé')
             
-            # Télécharger le contenu avec headers pour éviter le rate limiting
+            # Télécharger les sous-titres avec headers appropriés
             import urllib.request
-            import time
+            import urllib.error
             
-            # Ajouter un délai pour éviter le rate limiting
-            time.sleep(1)
+            print(f"[INFO] Téléchargement des sous-titres depuis {json3_format['url'][:50]}...")
             
             # Créer une requête avec headers de navigateur
             req = urllib.request.Request(json3_format['url'])
             req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
             req.add_header('Accept-Language', 'en-US,en;q=0.9,fr;q=0.8')
-            req.add_header('Accept', '*/*')
-            req.add_header('Referer', 'https://www.youtube.com/')
+            req.add_header('Accept', 'application/json')
+            req.add_header('Referer', f'https://www.youtube.com/watch?v={video_id}')
+            req.add_header('Origin', 'https://www.youtube.com')
             
-            response = urllib.request.urlopen(req)
-            json_data = json.loads(response.read().decode('utf-8'))
+            try:
+                response = urllib.request.urlopen(req, timeout=10)
+                json_data = json.loads(response.read().decode('utf-8'))
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    raise SubtitleError('Trop de requêtes. YouTube a bloqué temporairement les accès. Réessayez dans quelques minutes.')
+                elif e.code == 403:
+                    raise SubtitleError('Accès refusé. YouTube détecte les téléchargements automatisés.')
+                else:
+                    raise SubtitleError(f'Erreur HTTP {e.code} lors du téléchargement')
             
             # Parser le JSON YouTube
             transcript_data = parse_youtube_json(json_data)
             
             if not transcript_data:
                 raise SubtitleError('Impossible de parser les sous-titres')
+            
+            print(f"[INFO] {len(transcript_data)} lignes de sous-titres trouvées")
             
             # Formater selon le type demandé
             if format_type == 'txt':
@@ -113,14 +157,27 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             }
     
     except yt_dlp.utils.DownloadError as e:
-        if 'Video unavailable' in str(e):
-            raise SubtitleError('Vidéo non disponible')
-        raise SubtitleError(f'Erreur de téléchargement : {str(e)}')
+        error_msg = str(e)
+        print(f"[ERROR] DownloadError: {error_msg}")
+        
+        if 'Video unavailable' in error_msg or 'not available' in error_msg:
+            raise SubtitleError('Vidéo non disponible ou supprimée')
+        elif 'Sign in to confirm' in error_msg or 'bot' in error_msg.lower():
+            raise SubtitleError('YouTube a détecté un accès automatisé. Réessayez dans quelques minutes.')
+        elif 'Private video' in error_msg:
+            raise SubtitleError('Vidéo privée - impossible d\'accéder aux sous-titres')
+        else:
+            raise SubtitleError(f'Erreur YouTube: {error_msg[:100]}')
+    
+    except SubtitleError as e:
+        print(f"[ERROR] SubtitleError: {str(e)}")
+        raise
     
     except Exception as e:
         import traceback
-        traceback.print_exc()
-        raise SubtitleError(f'Erreur : {type(e).__name__} - {str(e)}')
+        error_msg = traceback.format_exc()
+        print(f"[ERROR] Exception: {error_msg}")
+        raise SubtitleError(f'Erreur: {type(e).__name__} - {str(e)[:100]}')
 
 def parse_youtube_json(json_data):
     """Parse le format JSON3 de YouTube"""
@@ -136,7 +193,6 @@ def parse_youtube_json(json_data):
             start_time = event.get('tStartMs', 0) / 1000.0
             duration = event.get('dDurationMs', 0) / 1000.0
             
-            # Concaténer tous les segments de texte
             text_parts = []
             for seg in event['segs']:
                 if 'utf8' in seg:
@@ -154,7 +210,7 @@ def parse_youtube_json(json_data):
         return transcript
     
     except Exception as e:
-        print(f"Erreur parsing JSON : {e}")
+        print(f"[ERROR] Erreur parsing JSON: {e}")
         return []
 
 def get_available_languages(video_id):
@@ -166,6 +222,9 @@ def get_available_languages(video_id):
             'skip_download': True,
             'quiet': True,
             'no_warnings': True,
+            'http_headers': {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -176,7 +235,6 @@ def get_available_languages(video_id):
             
             languages = []
             
-            # Sous-titres manuels
             for lang in subtitles.keys():
                 languages.append({
                     'code': lang,
@@ -185,9 +243,8 @@ def get_available_languages(video_id):
                     'isTranslatable': True
                 })
             
-            # Sous-titres auto-générés
             for lang in automatic_captions.keys():
-                if lang not in subtitles:  # Éviter les doublons
+                if lang not in subtitles:
                     languages.append({
                         'code': lang,
                         'name': f"{lang.upper()} (Auto)",
@@ -198,7 +255,7 @@ def get_available_languages(video_id):
             return languages
     
     except Exception as e:
-        raise SubtitleError(f'Erreur : {str(e)}')
+        raise SubtitleError(f'Erreur: {str(e)}')
 
 def format_as_text(transcript_data):
     """Formate en texte brut"""
