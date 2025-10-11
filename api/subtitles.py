@@ -8,12 +8,12 @@ class SubtitleError(Exception):
 
 def get_subtitles(video_id, format_type='txt', language='fr'):
     """
-    Récupère les sous-titres avec yt-dlp (plus fiable que youtube-transcript-api)
+    Récupère les sous-titres avec yt-dlp - VERSION ANTI-BOT
     """
     try:
         url = f'https://www.youtube.com/watch?v={video_id}'
         
-        # Configuration yt-dlp
+        # Configuration yt-dlp avec headers anti-détection
         ydl_opts = {
             'skip_download': True,
             'writesubtitles': True,
@@ -21,6 +21,19 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             'subtitleslangs': [language, 'en'],
             'quiet': True,
             'no_warnings': True,
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['android', 'web'],
+                    'skip': ['hls', 'dash']
+                }
+            },
+            # Headers pour contourner la détection bot
+            'http_headers': {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-us,en;q=0.5',
+                'Sec-Fetch-Mode': 'navigate',
+            }
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -70,9 +83,22 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             if not json3_format:
                 raise SubtitleError('Format de sous-titres non supporté')
             
-            # Télécharger le contenu
+            # Télécharger le contenu avec headers anti-bot
             import urllib.request
-            response = urllib.request.urlopen(json3_format['url'])
+            import time
+            
+            # Délai pour éviter rate limiting
+            time.sleep(1)
+            
+            # Créer requête avec headers
+            req = urllib.request.Request(json3_format['url'])
+            req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
+            req.add_header('Accept-Language', 'en-US,en;q=0.9,fr;q=0.8')
+            req.add_header('Accept', '*/*')
+            req.add_header('Referer', 'https://www.youtube.com/')
+            req.add_header('Origin', 'https://www.youtube.com')
+            
+            response = urllib.request.urlopen(req, timeout=30)
             json_data = json.loads(response.read().decode('utf-8'))
             
             # Parser le JSON YouTube
@@ -101,9 +127,16 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             }
     
     except yt_dlp.utils.DownloadError as e:
-        if 'Video unavailable' in str(e):
+        error_msg = str(e)
+        if 'Sign in to confirm' in error_msg or 'bot' in error_msg:
+            raise SubtitleError(
+                'YouTube a temporairement bloqué l\'accès. '
+                'Cela arrive parfois avec les vidéos récentes. '
+                'Réessayez dans quelques minutes ou essayez une autre vidéo.'
+            )
+        elif 'Video unavailable' in error_msg:
             raise SubtitleError('Vidéo non disponible')
-        raise SubtitleError(f'Erreur de téléchargement : {str(e)}')
+        raise SubtitleError(f'Erreur YouTube : {error_msg}')
     
     except Exception as e:
         import traceback
@@ -154,6 +187,14 @@ def get_available_languages(video_id):
             'skip_download': True,
             'quiet': True,
             'no_warnings': True,
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['android', 'web'],
+                }
+            },
+            'http_headers': {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            }
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -175,7 +216,7 @@ def get_available_languages(video_id):
             
             # Sous-titres auto-générés
             for lang in automatic_captions.keys():
-                if lang not in subtitles:  # Éviter les doublons
+                if lang not in subtitles:
                     languages.append({
                         'code': lang,
                         'name': f"{lang.upper()} (Auto)",
