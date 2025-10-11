@@ -1,8 +1,8 @@
 Flask==3.0.0
 flask-cors==4.0.0
-youtube-transcript-api==0.6.2
+yt-dlp==2024.8.6
 gunicorn==21.2.0
 Werkzeug==3.0.1
 
-# Dépendances optionnelles pour amélioration
+# Dépendances optionnelles
 requests==2.31.0
