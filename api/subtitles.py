@@ -3,7 +3,7 @@ import re
 import json
 
 class SubtitleError(Exception):
-    """Exception personnalisée pour les erreurs de sous-titres"...""
+    """Exception personnalisée pour les erreurs de sous-titres"""
     pass
 
 def get_subtitles(video_id, format_type='txt', language='fr'):

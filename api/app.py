@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
-from subtitles import get_subtitles, SubtitleError
+from .subtitles import get_subtitles, SubtitleError
 
 app = Flask(__name__, static_folder='..', static_url_path='')
 
-# Configuration CORS pour permettre l'accès depuis votre domaine
+# Configuration CORS pour permettre l'accès depuis votre domaine..
 CORS(app, resources={
     r"/api/*": {
         "origins": "*",  # En production, remplacez par votre domaine
