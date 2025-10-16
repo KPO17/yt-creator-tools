@@ -30,19 +30,11 @@ def get_subtitles_fallback(video_id, format_type='txt', language='fr'):
 
         # Essayer plusieurs formats et langues
         attempts = [
-            # Format XML standard
             f"https://www.youtube.com/api/timedtext?v={video_id}&lang={language}",
             f"https://www.youtube.com/api/timedtext?v={video_id}&lang={language}&fmt=json3",
-            f"https://www.youtube.com/api/timedtext?v={video_id}&lang={language}&fmt=vtt",
-            f"https://www.youtube.com/api/timedtext?v={video_id}&lang={language}&fmt=srv3",
-            
-            # Essayer en anglais si la langue demandée échoue
             f"https://www.youtube.com/api/timedtext?v={video_id}&lang=en",
             f"https://www.youtube.com/api/timedtext?v={video_id}&lang=en&fmt=json3",
-            
-            # Sans langue spécifiée (YouTube choisit)
             f"https://www.youtube.com/api/timedtext?v={video_id}",
-            f"https://www.youtube.com/api/timedtext?v={video_id}&fmt=json3",
         ]
         
         response = None
@@ -68,7 +60,7 @@ def get_subtitles_fallback(video_id, format_type='txt', language='fr'):
                 else:
                     print(f"❌ Échec HTTP {response.status_code}")
                     
-                time.sleep(0.5)  # Petite pause entre les requêtes
+                time.sleep(0.5)
                 
             except requests.RequestException as e:
                 print(f"❌ Erreur réseau: {e}")
@@ -82,7 +74,7 @@ def get_subtitles_fallback(video_id, format_type='txt', language='fr'):
         # Déterminer le format et parser
         transcript_data = []
         
-        if 'json' in used_url or looks_like_json(content):
+        if 'json' in used_url or (content.strip().startswith('{') and content.strip().endswith('}')):
             print("📄 Format détecté: JSON")
             transcript_data = parse_json_subtitles(content)
         else:
@@ -90,11 +82,7 @@ def get_subtitles_fallback(video_id, format_type='txt', language='fr'):
             transcript_data = parse_xml_subtitles(content)
         
         if not transcript_data:
-            # Essayer de parser comme texte brut
-            transcript_data = parse_plain_text(content)
-        
-        if not transcript_data:
-            raise SubtitleError('Impossible de parser les sous-titres - format non supporté')
+            raise SubtitleError('Impossible de parser les sous-titres')
 
         print(f"📊 {len(transcript_data)} segments de sous-titres trouvés")
 
@@ -123,43 +111,26 @@ def get_subtitles_fallback(video_id, format_type='txt', language='fr'):
     except Exception as e:
         raise SubtitleError(f'Erreur inattendue: {str(e)}')
 
-def looks_like_json(content):
-    """Vérifie si le contenu ressemble à du JSON"""
-    content = content.strip()
-    return content.startswith('{') and content.endswith('}')
-
 def parse_xml_subtitles(xml_content):
     """Parse le format XML des sous-titres YouTube"""
     try:
-        # Nettoyer le XML
         xml_content = xml_content.strip()
-        
-        # Essayer de parser comme XML standard
-        try:
-            root = ET.fromstring(xml_content)
-        except ET.ParseError:
-            # Essayer avec un wrapper XML
-            xml_content = f'<root>{xml_content}</root>'
-            root = ET.fromstring(xml_content)
-        
+        root = ET.fromstring(xml_content)
         transcript = []
         
-        # Chercher les éléments text dans tout l'arbre XML
-        for element in root.iter():
-            if element.tag.endswith('text') or element.text:
-                text = element.text or ''
-                start = float(element.get('start', 0))
-                dur = float(element.get('dur', element.get('d', 0)))
-                
-                # Nettoyer le texte
-                text = clean_text(text)
-                
-                if text and text.strip():
-                    transcript.append({
-                        'text': text.strip(),
-                        'start': start,
-                        'duration': dur
-                    })
+        for element in root.findall('.//text'):
+            text = element.text or ''
+            start = float(element.get('start', 0))
+            dur = float(element.get('dur', 0))
+            
+            text = clean_text(text)
+            
+            if text and text.strip():
+                transcript.append({
+                    'text': text.strip(),
+                    'start': start,
+                    'duration': dur
+                })
         
         return transcript
         
@@ -173,10 +144,9 @@ def parse_json_subtitles(json_content):
         data = json.loads(json_content)
         transcript = []
         
-        # Format JSON YouTube standard
         events = data.get('events', [])
         for event in events:
-            if 'segs' in event and event['segs']:
+            if 'segs' in event:
                 start = event.get('tStartMs', 0) / 1000.0
                 duration = event.get('dDurationMs', 0) / 1000.0
                 
@@ -195,41 +165,8 @@ def parse_json_subtitles(json_content):
         
         return transcript
         
-    except json.JSONDecodeError as e:
-        print(f"❌ Erreur JSON: {e}")
-        return []
     except Exception as e:
         print(f"❌ Erreur parsing JSON: {e}")
-        return []
-
-def parse_plain_text(text_content):
-    """Tente de parser comme texte brut avec timestamps"""
-    try:
-        lines = text_content.strip().split('\n')
-        transcript = []
-        
-        for i, line in enumerate(lines):
-            line = line.strip()
-            if line and not line.startswith('<?xml') and not line.startswith('{'):
-                # Essayer d'extraire un timestamp
-                time_match = re.search(r'(\d+\.?\d*)', line)
-                start_time = float(time_match.group(1)) if time_match else i * 5.0
-                
-                # Nettoyer la ligne
-                clean_line = re.sub(r'^\d+\.?\d*\s*', '', line)
-                clean_line = clean_text(clean_line)
-                
-                if clean_line and clean_line.strip():
-                    transcript.append({
-                        'text': clean_line.strip(),
-                        'start': start_time,
-                        'duration': 5.0  # Durée par défaut
-                    })
-        
-        return transcript
-        
-    except Exception as e:
-        print(f"❌ Erreur texte brut: {e}")
         return []
 
 def clean_text(text):
@@ -237,71 +174,35 @@ def clean_text(text):
     if not text:
         return ""
     
-    # Décoder les entités HTML
     text = unquote(text)
-    
-    # Supprimer les tags HTML
     text = re.sub(r'<[^>]+>', '', text)
     
-    # Remplacer les entités HTML courantes
     replacements = {
-        '&amp;': '&',
-        '&lt;': '<',
-        '&gt;': '>',
-        '&quot;': '"',
-        '&#39;': "'",
-        '&nbsp;': ' ',
-        '&eacute;': 'é',
-        '&egrave;': 'è',
-        '&ecirc;': 'ê',
-        '&agrave;': 'à',
+        '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', 
+        '&#39;': "'", '&nbsp;': ' ', '&eacute;': 'é', '&egrave;': 'è'
     }
     
     for entity, replacement in replacements.items():
         text = text.replace(entity, replacement)
     
-    # Décoder les séquences Unicode
-    text = re.sub(r'\\u([0-9a-fA-F]{4})', lambda m: chr(int(m.group(1), 16)), text)
-    
-    # Supprimer les espaces multiples et nettoyer
     text = re.sub(r'\s+', ' ', text)
-    text = text.strip()
-    
-    return text
+    return text.strip()
 
 def format_as_text(transcript_data):
-    """Formate en texte brut avec paragraphes"""
+    """Formate en texte brut"""
     if not transcript_data:
         return "Aucun sous-titre disponible."
     
     text_parts = []
-    current_paragraph = []
-    
     for entry in transcript_data:
         text = entry['text']
         if text:
-            current_paragraph.append(text)
-            
-            # Créer un paragraphe aux ponctuations fortes
-            if text.endswith(('.', '!', '?')):
-                if current_paragraph:
-                    paragraph_text = ' '.join(current_paragraph)
-                    text_parts.append(paragraph_text)
-                    current_paragraph = []
+            text_parts.append(text)
     
-    # Ajouter le dernier paragraphe s'il reste du texte
-    if current_paragraph:
-        paragraph_text = ' '.join(current_paragraph)
-        text_parts.append(paragraph_text)
-    
-    # Si pas de ponctuation, joindre tout
-    if not text_parts:
-        text_parts = [entry['text'] for entry in transcript_data if entry['text']]
-    
-    return '\n\n'.join(text_parts)
+    return ' '.join(text_parts)
 
 def format_as_srt(transcript_data):
-    """Formate en SRT avec numérotation"""
+    """Formate en SRT"""
     if not transcript_data:
         return "1\n00:00:00,000 --> 00:00:00,000\nAucun sous-titre disponible"
     
@@ -343,7 +244,6 @@ def format_timestamp_srt(seconds):
     minutes = int((seconds % 3600) // 60)
     secs = int(seconds % 60)
     millis = int((seconds % 1) * 1000)
-    
     return f"{hours:02d}:{minutes:02d}:{secs:02d},{millis:03d}"
 
 def format_timestamp_vtt(seconds):
@@ -352,5 +252,4 @@ def format_timestamp_vtt(seconds):
     minutes = int((seconds % 3600) // 60)
     secs = int(seconds % 60)
     millis = int((seconds % 1) * 1000)
-    
     return f"{hours:02d}:{minutes:02d}:{secs:02d}.{millis:03d}"
