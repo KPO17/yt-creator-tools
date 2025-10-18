@@ -46,21 +46,47 @@
         .logo {
             font-size: 3em;
             margin-bottom: 10px;
+        }
+        
+        .app-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
             background: linear-gradient(45deg, #FF0000, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .app-title {
-            font-size: 2.2em;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
         .app-subtitle {
             opacity: 0.8;
             font-size: 1.1em;
+        }
+        
+        /* Navigation - Style identique à about.html */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
         }
         
         /* Zone publicitaire */
@@ -430,7 +456,6 @@
             margin: 0 auto 15px;
         }
         
-        /* NOUVEAU : Loader de sous-titres */
         .subtitle-loading {
             position: fixed;
             top: 0;
@@ -712,7 +737,69 @@
             border-color: #3367d6;
         }
         
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* RESPONSIVE : Tablette (< 900px) */
+        @media (max-width: 900px) {
+            nav {
+                padding: 12px 8px;
+            }
+            
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9em;
+                padding: 5px 8px;
+            }
+        }
+
+        /* RESPONSIVE : Mobile (< 768px) */
         @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            nav {
+                padding: 10px 5px;
+                border-radius: 10px;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            nav a {
+                font-size: 0.75em;
+                margin: 0 5px;
+                padding: 5px 8px;
+                white-space: nowrap;
+                display: inline-block;
+            }
+            
             .thumbnails-grid {
                 grid-template-columns: 1fr;
             }
@@ -742,6 +829,28 @@
                 padding: 30px 20px;
             }
         }
+
+        /* RESPONSIVE : Très petit mobile (< 480px) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 8px 3px;
+            }
+            
+            nav a {
+                font-size: 0.7em;
+                margin: 0 3px;
+                padding: 4px 6px;
+            }
+        }
+
+        /* RESPONSIVE : Mini écran (< 360px) */
+        @media (max-width: 360px) {
+            nav a {
+                font-size: 0.65em;
+                margin: 0 2px;
+                padding: 3px 5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -752,12 +861,21 @@
             <p class="app-subtitle">Outils professionnels pour créateurs YouTube</p>
         </div>
         
+        <!-- Navigation identique à about.html -->
+        <nav>
+            <a href="/">🏠 Accueil</a>
+            <a href="/about.html">ℹ️ À propos</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/privacy_policy.html">🔒 Confidentialité</a>
+            <a href="/terms.html">📜 CGU</a>
+        </nav>
+        
         <!-- Zone publicitaire -->
-        <div class="ad-zone" id="main-ad">
+        <!--<div class="ad-zone" id="main-ad">
             <div class="ad-placeholder">
                 📺 Espace publicitaire - Configurez Google AdSense
             </div>
-        </div>
+        </div>-->
         
         <!-- Section d'authentification -->
         <div class="auth-section">
@@ -875,6 +993,20 @@
                 <a href="https://tiktok.com/@yourtiktok" class="social-icon tiktok" title="TikTok">🎵</a>
             </div>
         </div>
+        
+        <!-- Footer -->
+        <footer>
+            <div style="margin-bottom: 20px;">
+                <a href="/">Accueil</a> |
+                <a href="/about.html">À propos</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy_policy.html">Confidentialité</a> |
+                <a href="/terms.html">CGU</a>
+            </div>
+            <p style="opacity: 0.7;">© 2025 YT Creator Tools - Tous droits réservés</p>
+            <p style="opacity: 0.6; font-size: 0.9em;">Développé avec ❤️ par KINGSOFT BUSINESS</p>
+            <p style="opacity: 0.5; font-size: 0.85em; margin-top: 10px;">Yaoundé, Cameroun | +237 697 636 355</p>
+        </footer>
     </div>
 
     <!-- Modal d'authentification -->
@@ -939,7 +1071,7 @@
         </div>
     </div>
 
-    <!-- NOUVEAU : Loader de téléchargement de sous-titres -->
+    <!-- Loader de téléchargement de sous-titres -->
     <div id="subtitle-loading" class="subtitle-loading">
         <div class="subtitle-loader-content">
             <div class="subtitle-loader-spinner"></div>
@@ -1127,7 +1259,6 @@
             ? 'http://localhost:5000'
             : '';
 
-        // FONCTION MODIFIÉE : downloadSubtitles avec loader
         async function downloadSubtitles(format) {
             if (!currentUser) {
                 showError('Connectez-vous pour accéder aux sous-titres');
@@ -1148,19 +1279,16 @@
             }
             
             try {
-                // Étape 1 - Afficher le loader
                 showSubtitleLoader(true, '📡 Connexion au serveur');
                 updateSubtitleLoaderText('📡 Connexion au serveur', 'Établissement de la connexion...');
                 await new Promise(resolve => setTimeout(resolve, 400));
                 
-                // Étape 2 - Analyse de la vidéo
                 updateSubtitleLoaderText('🎬 Analyse de la vidéo', `ID: ${videoId}`);
                 await new Promise(resolve => setTimeout(resolve, 300));
                 
                 const languageSelector = document.getElementById('language-selector');
                 const selectedLanguage = languageSelector ? languageSelector.value : 'fr';
                 
-                // Étape 3 - Recherche des sous-titres
                 updateSubtitleLoaderText('🔍 Recherche des sous-titres', `Langue: ${selectedLanguage.toUpperCase()}`);
                 
                 const response = await fetch(`${API_BASE_URL}/api/subtitles`, {
@@ -1180,15 +1308,12 @@
                     throw new Error(errorData.error || 'Erreur lors du téléchargement');
                 }
                 
-                // Étape 4 - Récupération des données
                 updateSubtitleLoaderText('📥 Récupération des données', 'Téléchargement en cours...');
                 const result = await response.json();
                 
-                // Étape 5 - Formatage
                 updateSubtitleLoaderText('📝 Formatage du fichier', `Format: ${format.toUpperCase()}`);
                 await new Promise(resolve => setTimeout(resolve, 300));
                 
-                // Étape 6 - Préparation du téléchargement
                 updateSubtitleLoaderText('💾 Préparation du téléchargement', 'Création du fichier...');
                 
                 const blob = new Blob([result.content], { type: 'text/plain; charset=utf-8' });
@@ -1204,7 +1329,6 @@
                 
                 URL.revokeObjectURL(downloadUrl);
                 
-                // Étape 7 - Succès
                 updateSubtitleLoaderText('✅ Téléchargement réussi !', 'Le fichier est prêt');
                 await new Promise(resolve => setTimeout(resolve, 800));
                 
@@ -1229,7 +1353,6 @@
             }
         }
 
-        // Fonction pour afficher/masquer le loader de sous-titres
         function showSubtitleLoader(show, text = 'Téléchargement en cours...') {
             const loader = document.getElementById('subtitle-loading');
             const loaderText = document.querySelector('.subtitle-loader-text');
@@ -1244,7 +1367,6 @@
             }
         }
 
-        // Fonction pour mettre à jour le texte du loader
         function updateSubtitleLoaderText(mainText, subText = '') {
             const loaderText = document.querySelector('.subtitle-loader-text');
             const loaderSubtext = document.getElementById('subtitle-loader-subtext');

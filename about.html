@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos - YT Creator Tools</title>
+    <meta name="description" content="Découvrez YT Creator Tools, la plateforme professionnelle pour créateurs YouTube développée par KINGSOFT BUSINESS">
+    <meta name="theme-color" content="#FF0000">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #FF0000 0%, #282828 50%, #000000 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .app-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FF0000, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1, h2 {
+            color: #FF6B6B;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.5);
+        }
+        
+        h3 {
+            color: #FF8888;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        
+        .highlight-box {
+            background: rgba(255, 0, 0, 0.2);
+            border-left: 4px solid #FF0000;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #FF0000;
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #FF6B6B;
+        }
+        
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .company-info {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            margin: 30px 0;
+        }
+        
+        .contact-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 3px solid #FF0000;
+        }
+        
+        .contact-card strong {
+            color: #FF6B6B;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* RESPONSIVE : Tablette (< 900px) */
+        @media (max-width: 900px) {
+            nav {
+                padding: 12px 8px;
+            }
+            
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9em;
+                padding: 5px 8px;
+            }
+        }
+
+        /* RESPONSIVE : Mobile (< 768px) */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-section {
+                padding: 25px 20px;
+            }
+            
+            nav {
+                padding: 10px 5px;
+                border-radius: 10px;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            nav a {
+                font-size: 0.75em;
+                margin: 0 5px;
+                padding: 5px 8px;
+                white-space: nowrap;
+                display: inline-block;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        /* RESPONSIVE : Très petit mobile (< 480px) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 8px 3px;
+            }
+            
+            nav a {
+                font-size: 0.7em;
+                margin: 0 3px;
+                padding: 4px 6px;
+            }
+        }
+
+        /* RESPONSIVE : Mini écran (< 360px) */
+        @media (max-width: 360px) {
+            nav a {
+                font-size: 0.65em;
+                margin: 0 2px;
+                padding: 3px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎬</div>
+            <h1 class="app-title">YT Creator Tools</h1>
+        </div>
+        
+        <nav>
+            <a href="/">🏠 Accueil</a>
+            <a href="/about.html">ℹ️ À propos</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/privacy_policy.html">🔒 Confidentialité</a>
+            <a href="/terms.html">📜 CGU</a>
+        </nav>
+        
+        <div class="content-section">
+            <h1>À propos de YT Creator Tools</h1>
+            
+            <div class="highlight-box">
+                <p style="font-size: 1.2em; text-align: center; margin: 0;">
+                    <strong>YT Creator Tools</strong> est une plateforme professionnelle gratuite dédiée aux créateurs YouTube, leur offrant des outils puissants pour optimiser leur contenu et augmenter leur productivité.
+                </p>
+            </div>
+            
+            <h2>🎯 Notre Mission</h2>
+            <p>Notre mission est de <strong>démocratiser l'accès aux outils professionnels</strong> pour les créateurs YouTube, qu'ils soient débutants ou expérimentés. Nous croyons que chaque créateur mérite d'avoir accès aux meilleurs outils pour réussir sur YouTube, sans barrières financières ou techniques.</p>
+            
+            <p>Nous nous engageons à fournir des solutions simples, efficaces et 100% gratuites qui permettent aux créateurs de :</p>
+            <ul>
+                <li>📊 <strong>Analyser</strong> leurs vidéos en profondeur</li>
+                <li>🖼️ <strong>Extraire</strong> des miniatures en haute qualité</li>
+                <li>📝 <strong>Récupérer</strong> des sous-titres dans plusieurs formats</li>
+                <li>🔍 <strong>Optimiser</strong> leur référencement YouTube</li>
+                <li>⚡ <strong>Gagner du temps</strong> dans leur workflow quotidien</li>
+            </ul>
+            
+            <h2>🛠️ Nos Outils</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Extraction de Métadonnées</h3>
+                    <p>Récupérez instantanément le titre, la description et les tags de n'importe quelle vidéo YouTube.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Téléchargement de Miniatures</h3>
+                    <p>Téléchargez des miniatures en HD, Full HD et qualité maximale (1280x720).</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Sous-titres Multi-formats</h3>
+                    <p>Exportez les sous-titres en TXT, SRT et VTT pour tous vos besoins de production.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Analyse de Tags</h3>
+                    <p>Découvrez les tags utilisés par vos concurrents pour optimiser votre SEO.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Interface Rapide</h3>
+                    <p>Aucune installation, aucune inscription requise pour les fonctionnalités de base.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Sécurisé & Privé</h3>
+                    <p>Vos données restent privées. Nous ne stockons aucune information personnelle.</p>
+                </div>
+            </div>
+            
+            <h2>✨ Pourquoi Nous Choisir ?</h2>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Gratuit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Installation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Formats Export</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Disponibilité</div>
+                </div>
+            </div>
+            
+            <ul style="font-size: 1.1em;">
+                <li>✅ <strong>100% Gratuit</strong> - Tous nos outils principaux sont totalement gratuits</li>
+                <li>✅ <strong>Aucune Installation</strong> - Fonctionne directement dans votre navigateur</li>
+                <li>✅ <strong>Interface Intuitive</strong> - Design moderne et facile à utiliser</li>
+                <li>✅ <strong>Respect de la Vie Privée</strong> - Nous ne vendons ni ne partageons vos données</li>
+                <li>✅ <strong>Outils Professionnels</strong> - Qualité utilisée par des milliers de créateurs</li>
+                <li>✅ <strong>Support Réactif</strong> - Notre équipe répond rapidement à vos questions</li>
+                <li>✅ <strong>Mises à Jour Régulières</strong> - Nous améliorons constamment nos services</li>
+                <li>✅ <strong>Multi-langues</strong> - Support des sous-titres dans plusieurs langues</li>
+            </ul>
+            
+            <h2>🏢 À propos de KINGSOFT BUSINESS</h2>
+            
+            <div class="company-info">
+                <p><strong>YT Creator Tools</strong> est développé et maintenu par <strong>KINGSOFT BUSINESS</strong>, une entreprise technologique camerounaise spécialisée dans le développement de solutions web innovantes.</p>
+                
+                <h3>Notre Vision</h3>
+                <p>Nous croyons en un internet accessible où les outils professionnels ne sont pas réservés qu'aux grandes entreprises. Notre vision est de créer des plateformes qui permettent à chacun, peu importe sa localisation ou ses moyens, d'avoir accès aux meilleures technologies.</p>
+                
+                <h3>Notre Équipe</h3>
+                <p>Notre équipe est composée de développeurs passionnés, de designers créatifs et d'experts en marketing digital, tous dédiés à créer les meilleurs outils pour les créateurs de contenu.</p>
+                
+                <h3>Nos Valeurs</h3>
+                <ul>
+                    <li>🎯 <strong>Excellence</strong> - Nous visons la perfection dans tout ce que nous créons</li>
+                    <li>💡 <strong>Innovation</strong> - Nous recherchons constamment de nouvelles solutions</li>
+                    <li>🤝 <strong>Accessibilité</strong> - Nos outils doivent être utilisables par tous</li>
+                    <li>🔒 <strong>Intégrité</strong> - La confiance de nos utilisateurs est sacrée</li>
+                    <li>🌍 <strong>Impact Social</strong> - Nous contribuons à l'économie numérique africaine</li>
+                </ul>
+            </div>
+            
+            <h2>📞 Informations de Contact</h2>
+            
+            <div class="contact-card">
+                <strong>📧 Email Professionnel</strong>
+                <a href="mailto:kingsoft237@gmail.com" style="color: white;">kingsoft237@gmail.com</a>
+            </div>
+            
+            <div class="contact-card">
+                <strong>📱 Téléphone / WhatsApp</strong>
+                <a href="tel:+237697636355" style="color: white;">+237 697 636 355</a>
+            </div>
+            
+            <div class="contact-card">
+                <strong>🌐 Site Web</strong>
+                <a href="https://kingsoftbusiness.com" target="_blank" style="color: white;">kingsoftbusiness.com</a>
+            </div>
+            
+            <div class="contact-card">
+                <strong>📍 Localisation</strong>
+                <span>Yaoundé, Cameroun</span>
+            </div>
+            
+            <h2>🚀 Technologies Utilisées</h2>
+            <p>YT Creator Tools est construit avec les technologies web les plus modernes pour garantir performance, sécurité et fiabilité :</p>
+            <ul>
+                <li>⚡ <strong>Frontend</strong> - HTML5, CSS3, JavaScript moderne</li>
+                <li>🔥 <strong>Backend</strong> - Python Flask, API YouTube</li>
+                <li>🔐 <strong>Authentification</strong> - Firebase Authentication</li>
+                <li>☁️ <strong>Hébergement</strong> - Render.com (Infrastructure Cloud)</li>
+                <li>🛡️ <strong>Sécurité</strong> - HTTPS, Chiffrement SSL/TLS</li>
+                <li>📱 <strong>Responsive</strong> - Compatible mobile, tablette, desktop</li>
+            </ul>
+            
+            <h2>🎓 Pour les Développeurs</h2>
+            <p>Vous êtes développeur et souhaitez contribuer ou en savoir plus sur notre stack technique ? Nous sommes ouverts à la collaboration et aux partenariats.</p>
+            <p>Contactez-nous à <a href="mailto:kingsoft237@gmail.com" style="color: #FF6B6B;">kingsoft237@gmail.com</a> pour discuter d'opportunités de collaboration.</p>
+            
+            <h2>📜 Conformité et Légalité</h2>
+            <p>YT Creator Tools respecte scrupuleusement :</p>
+            <ul>
+                <li>✅ Les <strong>Conditions d'utilisation de YouTube</strong></li>
+                <li>✅ Le <strong>RGPD</strong> (Règlement Général sur la Protection des Données)</li>
+                <li>✅ Les <strong>lois camerounaises</strong> sur la protection des données</li>
+                <li>✅ Les <strong>standards internationaux</strong> de sécurité web</li>
+            </ul>
+            
+            <div class="highlight-box" style="margin-top: 40px; text-align: center;">
+                <h3 style="color: white; margin-bottom: 15px;">Rejoignez des milliers de créateurs satisfaits</h3>
+                <p style="font-size: 1.1em;">Commencez à optimiser votre contenu YouTube dès aujourd'hui !</p>
+                <a href="/" style="display: inline-block; margin-top: 20px; padding: 15px 40px; background: linear-gradient(45deg, #FF0000, #FF6B6B); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease;">
+                    🚀 Essayer Maintenant
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <div style="margin-bottom: 20px;">
+                <a href="/">Accueil</a> |
+                <a href="/about.html">À propos</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy_policy.html">Confidentialité</a> |
+                <a href="/terms.html">CGU</a>
+            </div>
+            <p style="opacity: 0.7;">© 2025 YT Creator Tools - Tous droits réservés</p>
+            <p style="opacity: 0.6; font-size: 0.9em;">Développé avec ❤️ par KINGSOFT BUSINESS</p>
+            <p style="opacity: 0.5; font-size: 0.85em; margin-top: 10px;">Yaoundé, Cameroun | +237 697 636 355</p>
+        </footer>
+    </div>
+</body>
+</html>

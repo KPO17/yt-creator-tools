@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - YT Creator Tools</title>
+    <meta name="description" content="Contactez l'équipe de YT Creator Tools - Support, questions, suggestions et partenariats">
+    <meta name="theme-color" content="#FF0000">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #FF0000 0%, #282828 50%, #000000 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .app-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FF0000, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1, h2 {
+            color: #FF6B6B;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.5);
+        }
+        
+        h3 {
+            color: #FF8888;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .intro-text {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .contact-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: #FF0000;
+            background: rgba(255, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .contact-card h3 {
+            color: #FF6B6B;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 0, 0, 0.3);
+            border-radius: 25px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card a:hover {
+            background: #FF0000;
+            transform: scale(1.05);
+        }
+        
+        .faq-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 3px solid #FF0000;
+        }
+        
+        .faq-question {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .support-hours {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .business-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        .info-icon {
+            font-size: 2em;
+            margin-right: 20px;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .info-content strong {
+            color: #FF6B6B;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .social-icon.email { background: #EA4335; }
+        .social-icon.whatsapp { background: #25D366; }
+        .social-icon.phone { background: #4285F4; }
+        .social-icon.website { background: #FF6B6B; }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* RESPONSIVE : Tablette */
+        @media (max-width: 900px) {
+            nav {
+                padding: 12px 8px;
+            }
+            
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9em;
+                padding: 5px 8px;
+            }
+        }
+        
+        /* RESPONSIVE : Mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-section {
+                padding: 25px 20px;
+            }
+            
+            nav {
+                padding: 10px 5px;
+                border-radius: 10px;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            nav a {
+                font-size: 0.75em;
+                margin: 0 5px;
+                padding: 5px 8px;
+                white-space: nowrap;
+                display: inline-block;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .info-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+        
+        /* RESPONSIVE : Très petit mobile */
+        @media (max-width: 480px) {
+            nav {
+                padding: 8px 3px;
+            }
+            
+            nav a {
+                font-size: 0.7em;
+                margin: 0 3px;
+                padding: 4px 6px;
+            }
+        }
+        
+        /* RESPONSIVE : Mini écran */
+        @media (max-width: 360px) {
+            nav a {
+                font-size: 0.65em;
+                margin: 0 2px;
+                padding: 3px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎬</div>
+            <h1 class="app-title">YT Creator Tools</h1>
+        </div>
+        
+        <nav>
+            <a href="/">🏠 Accueil</a>
+            <a href="/about.html">ℹ️ À propos</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/privacy_policy.html">🔒 Confidentialité</a>
+            <a href="/terms.html">📜 CGU</a>
+        </nav>
+        
+        <div class="content-section">
+            <h1>📞 Contactez-Nous</h1>
+            
+            <div class="intro-text">
+                <p>Vous avez une question, une suggestion ou besoin d'aide ? Notre équipe est là pour vous répondre rapidement et efficacement. N'hésitez pas à nous contacter par le moyen qui vous convient le mieux !</p>
+            </div>
+            
+            <h2>💬 Moyens de Contact</h2>
+            
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <span class="contact-icon">📧</span>
+                    <h3>Email</h3>
+                    <p>Pour toute question ou support</p>
+                    <a href="mailto:kingsoft237@gmail.com">kingsoft237@gmail.com</a>
+                    <p style="font-size: 0.9em; opacity: 0.7; margin-top: 15px;">Réponse sous 24-48h</p>
+                </div>
+                
+                <div class="contact-card">
+                    <span class="contact-icon">📱</span>
+                    <h3>WhatsApp</h3>
+                    <p>Chat rapide et support instantané</p>
+                    <a href="https://wa.me/237697636355" target="_blank">+237 697 636 355</a>
+                    <p style="font-size: 0.9em; opacity: 0.7; margin-top: 15px;">Lun-Sam: 9h-18h (GMT+1)</p>
+                </div>
+                
+                <div class="contact-card">
+                    <span class="contact-icon">☎️</span>
+                    <h3>Téléphone</h3>
+                    <p>Appelez-nous directement</p>
+                    <a href="tel:+237697636355">+237 697 636 355</a>
+                    <p style="font-size: 0.9em; opacity: 0.7; margin-top: 15px;">Heures ouvrables</p>
+                </div>
+                
+                <div class="contact-card">
+                    <span class="contact-icon">🌐</span>
+                    <h3>Site Web</h3>
+                    <p>Découvrez nos autres services</p>
+                    <a href="https://kingsoftbusiness.com" target="_blank">kingsoftbusiness.com</a>
+                    <p style="font-size: 0.9em; opacity: 0.7; margin-top: 15px;">Portfolio complet</p>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="mailto:kingsoft237@gmail.com" class="social-icon email" title="Email">📧</a>
+                <a href="https://wa.me/237697636355" class="social-icon whatsapp" target="_blank" title="WhatsApp">💬</a>
+                <a href="tel:+237697636355" class="social-icon phone" title="Téléphone">📞</a>
+                <a href="https://kingsoftbusiness.com" class="social-icon website" target="_blank" title="Site Web">🌐</a>
+            </div>
+            
+            <div class="support-hours">
+                <h3 style="color: #FF6B6B; margin-bottom: 15px;">⏰ Heures de Support</h3>
+                <p style="font-size: 1.1em; margin-bottom: 10px;"><strong>Lundi - Vendredi:</strong> 9h00 - 18h00 (GMT+1)</p>
+                <p style="font-size: 1.1em; margin-bottom: 10px;"><strong>Samedi:</strong> 10h00 - 14h00 (GMT+1)</p>
+                <p style="font-size: 1.1em;"><strong>Dimanche:</strong> Fermé (emails traités le lundi)</p>
+                <p style="font-size: 0.9em; opacity: 0.7; margin-top: 15px;">
+                    ⚡ Pour les urgences critiques, envoyez un email avec [URGENT] dans l'objet
+                </p>
+            </div>
+            
+            <h2>🏢 Informations Professionnelles</h2>
+            
+            <div class="business-info">
+                <div class="info-row">
+                    <div class="info-icon">🏢</div>
+                    <div class="info-content">
+                        <strong>Nom de l'entreprise</strong>
+                        <span>KINGSOFT BUSINESS</span>
+                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <strong>Localisation</strong>
+                        <span>Douala, Littoral, Cameroun</span>
+                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-icon">📧</div>
+                    <div class="info-content">
+                        <strong>Email Professionnel</strong>
+                        <a href="mailto:kingsoft237@gmail.com" style="color: white;">kingsoft237@gmail.com</a>
+                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-icon">📱</div>
+                    <div class="info-content">
+                        <strong>Téléphone / WhatsApp</strong>
+                        <a href="tel:+237697636355" style="color: white;">+237 697 636 355</a>
+                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <strong>Site Web Corporate</strong>
+                        <a href="https://kingsoftbusiness.com" target="_blank" style="color: white;">kingsoftbusiness.com</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>❓ Questions Fréquentes (FAQ)</h2>
+            
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">Comment télécharger des sous-titres ?</div>
+                    <div class="faq-answer">
+                        <p>1. Connectez-vous avec votre compte Google ou créez un compte</p>
+                        <p>2. Collez le lien YouTube de votre vidéo</p>
+                        <p>3. Cliquez sur "Analyser"</p>
+                        <p>4. Choisissez le format de sous-titres souhaité (TXT, SRT ou VTT)</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Les outils sont-ils vraiment 100% gratuits ?</div>
+                    <div class="faq-answer">
+                        <p>Oui ! L'extraction de métadonnées et le téléchargement de miniatures sont totalement gratuits sans inscription.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Mes données sont-elles sécurisées ?</div>
+                    <div class="faq-answer">
+                        <p>Absolument. Nous ne stockons aucune donnée personnelle. Consultez notre <a href="/privacy_policy.html" style="color: #FF6B6B;">politique de confidentialité</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div style="margin-bottom: 20px;">
+                <a href="/">Accueil</a> |
+                <a href="/about.html">À propos</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy_policy.html">Confidentialité</a> |
+                <a href="/terms.html">CGU</a>
+            </div>
+            <p style="opacity: 0.7;">© 2025 YT Creator Tools - Tous droits réservés</p>
+            <p style="opacity: 0.6; font-size: 0.9em;">Développé avec ❤️ par KINGSOFT BUSINESS</p>
+            <p style="opacity: 0.5; font-size: 0.85em; margin-top: 10px;">
+                📍 Yaoundé, Cameroun | 📧 kingsoft237@gmail.com | 📱 +237 697 636 355
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

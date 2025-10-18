@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions d'Utilisation - YT Creator Tools</title>
+    <meta name="description" content="Conditions générales d'utilisation de YT Creator Tools - KINGSOFT BUSINESS">
+    <meta name="theme-color" content="#FF0000">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #FF0000 0%, #282828 50%, #000000 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .app-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FF0000, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1, h2, h3 {
+            color: #FF6B6B;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.5);
+        }
+        
+        h3 {
+            font-size: 1.4em;
+            margin-top: 25px;
+            color: #FF8888;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            opacity: 0.95;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+        
+        .highlight-box {
+            background: rgba(255, 0, 0, 0.2);
+            border-left: 4px solid #FF0000;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .warning-box {
+            background: rgba(255, 152, 0, 0.2);
+            border-left: 4px solid #FF9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .info-box {
+            background: rgba(33, 150, 243, 0.2);
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .last-updated {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-top: 40px;
+            border-top: 2px solid rgba(255, 107, 107, 0.5);
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        strong {
+            color: #FF8888;
+        }
+        
+        a {
+            color: #FF6B6B;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* RESPONSIVE : Tablette */
+        @media (max-width: 900px) {
+            nav {
+                padding: 12px 8px;
+            }
+            
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9em;
+                padding: 5px 8px;
+            }
+        }
+        
+        /* RESPONSIVE : Mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-section {
+                padding: 25px 20px;
+            }
+            
+            nav {
+                padding: 10px 5px;
+                border-radius: 10px;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            nav a {
+                font-size: 0.75em;
+                margin: 0 5px;
+                padding: 5px 8px;
+                white-space: nowrap;
+                display: inline-block;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+        
+        /* RESPONSIVE : Très petit mobile */
+        @media (max-width: 480px) {
+            nav {
+                padding: 8px 3px;
+            }
+            
+            nav a {
+                font-size: 0.7em;
+                margin: 0 3px;
+                padding: 4px 6px;
+            }
+        }
+        
+        /* RESPONSIVE : Mini écran */
+        @media (max-width: 360px) {
+            nav a {
+                font-size: 0.65em;
+                margin: 0 2px;
+                padding: 3px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎬</div>
+            <h1 class="app-title">YT Creator Tools</h1>
+        </div>
+        
+        <nav>
+            <a href="/">🏠 Accueil</a>
+            <a href="/about.html">ℹ️ À propos</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/privacy_policy.html">🔒 Confidentialité</a>
+            <a href="/terms.html">📜 CGU</a>
+        </nav>
+        
+        <div class="content-section">
+            <h1>📜 Conditions Générales d'Utilisation</h1>
+            
+            <div class="highlight-box">
+                <p style="text-align: center; font-size: 1.1em;">
+                    <strong>Bienvenue sur YT Creator Tools !</strong><br>
+                    En utilisant notre service, vous acceptez les présentes conditions d'utilisation.
+                </p>
+            </div>
+            
+            <h2>1. Informations Générales</h2>
+            
+            <h3>1.1 Éditeur du Service</h3>
+            <ul>
+                <li><strong>Nom de l'application :</strong> YT Creator Tools</li>
+                <li><strong>Éditeur :</strong> KINGSOFT BUSINESS</li>
+                <li><strong>Siège social :</strong> Yaoundé, Cameroun</li>
+                <li><strong>Email :</strong> kingsoft237@gmail.com</li>
+                <li><strong>Téléphone :</strong> +237 697 636 355</li>
+                <li><strong>Site web :</strong> <a href="https://kingsoftbusiness.com">kingsoftbusiness.com</a></li>
+            </ul>
+            
+            <h3>1.2 Objet</h3>
+            <p>Les présentes Conditions Générales d'Utilisation (ci-après "CGU") définissent les modalités et conditions d'utilisation du service <strong>YT Creator Tools</strong>.</p>
+            
+            <h2>2. Services Proposés</h2>
+            <ul>
+                <li>📊 <strong>Extraction de métadonnées YouTube</strong></li>
+                <li>🖼️ <strong>Téléchargement de miniatures</strong></li>
+                <li>📝 <strong>Récupération de sous-titres</strong> (TXT, SRT, VTT)</li>
+                <li>🔍 <strong>Analyse de contenu vidéo</strong></li>
+            </ul>
+            
+            <h2>3. Utilisation Autorisée</h2>
+            <ul>
+                <li>✅ Analyser des vidéos YouTube publiques</li>
+                <li>✅ Télécharger des miniatures pour usage personnel ou commercial</li>
+                <li>✅ Extraire des sous-titres</li>
+                <li>✅ Utiliser les métadonnées pour recherche et analyse</li>
+            </ul>
+            
+            <h2>4. Usages Interdits</h2>
+            
+            <div class="warning-box">
+                <p><strong>⚠️ Il est strictement interdit de :</strong></p>
+                <ul>
+                    <li>❌ Utiliser le service à des fins illégales</li>
+                    <li>❌ Télécharger du contenu protégé par copyright sans autorisation</li>
+                    <li>❌ Tenter de pirater ou compromettre le service</li>
+                    <li>❌ Utiliser des bots ou automatisations non autorisés</li>
+                    <li>❌ Surcharger le service avec des requêtes excessives</li>
+                </ul>
+            </div>
+            
+            <h2>5. Responsabilités</h2>
+            
+            <h3>5.1 Responsabilité de l'Utilisateur</h3>
+            <ul>
+                <li>🔐 Confidentialité de ses identifiants</li>
+                <li>⚖️ Usage légal du contenu téléchargé</li>
+                <li>✅ Respect des conditions d'utilisation de YouTube</li>
+            </ul>
+            
+            <h3>5.2 Responsabilité de KINGSOFT BUSINESS</h3>
+            
+            <div class="info-box">
+                <p><strong>ℹ️ Le service est fourni "tel quel" :</strong></p>
+                <ul>
+                    <li>📋 Nous maintenons le service disponible 24/7</li>
+                    <li>⚠️ Nous ne garantissons pas l'absence d'interruptions</li>
+                    <li>🚫 Nous ne sommes pas responsables des contenus tiers</li>
+                </ul>
+            </div>
+            
+            <h2>6. Protection des Données</h2>
+            <p>Vos données sont utilisées uniquement pour fournir le service. Pour plus de détails, consultez notre <a href="/privacy_policy.html">Politique de Confidentialité</a>.</p>
+            
+            <h2>7. Propriété Intellectuelle</h2>
+            <p>Le service YT Creator Tools et tous ses éléments sont la propriété exclusive de <strong>KINGSOFT BUSINESS</strong>.</p>
+            
+            <h2>8. Modifications du Service</h2>
+            <p>KINGSOFT BUSINESS se réserve le droit de modifier le service à tout moment avec notification préalable.</p>
+            
+            <h2>9. Suspension et Résiliation</h2>
+            <p>Nous pouvons suspendre votre compte en cas de violation des CGU.</p>
+            
+            <h2>10. Droit Applicable</h2>
+            <p>Les présentes CGU sont régies par le <strong>droit camerounais</strong>.</p>
+            
+            <h2>11. Contact</h2>
+            
+            <div class="highlight-box">
+                <h3 style="color: white; text-align: center; margin-bottom: 20px;">📞 Pour toute question</h3>
+                
+                <p style="text-align: center; margin: 10px 0;">
+                    <strong>📧 Email :</strong> <a href="mailto:kingsoft237@gmail.com" style="color: white;">kingsoft237@gmail.com</a>
+                </p>
+                
+                <p style="text-align: center; margin: 10px 0;">
+                    <strong>📱 WhatsApp :</strong> <a href="https://wa.me/237697636355" style="color: white;" target="_blank">+237 697 636 355</a>
+                </p>
+                
+                <p style="text-align: center; margin: 10px 0;">
+                    <strong>☎️ Téléphone :</strong> <a href="tel:+237697636355" style="color: white;">+237 697 636 355</a>
+                </p>
+            </div>
+            
+            <div class="last-updated">
+                <p style="font-size: 1.1em; margin-bottom: 10px;"><strong>📅 Dernière mise à jour :</strong> Décembre 2024</p>
+                <p style="opacity: 0.8;"><strong>Version :</strong> 1.0</p>
+            </div>
+            
+            <div style="background: rgba(76, 175, 80, 0.2); padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center; border-left: 4px solid #4CAF50;">
+                <h3 style="color: #4CAF50; margin-bottom: 15px;">✅ Merci d'utiliser YT Creator Tools !</h3>
+                <p>En acceptant ces conditions, vous nous aidez à maintenir un service de qualité.</p>
+                <p style="margin-top: 15px;">
+                    <a href="/" style="display: inline-block; padding: 15px 40px; background: linear-gradient(45deg, #FF0000, #FF6B6B); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 10px;">
+                        🚀 Commencer à Utiliser le Service
+                    </a>
+                </p>
+            </div>
+        </div>
+        
+        <footer>
+            <div style="margin-bottom: 20px;">
+                <a href="/">Accueil</a> |
+                <a href="/about.html">À propos</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy_policy.html">Confidentialité</a> |
+                <a href="/terms.html">CGU</a>
+            </div>
+            <p style="opacity: 0.7;">© 2025 YT Creator Tools - Tous droits réservés</p>
+            <p style="opacity: 0.6; font-size: 0.9em;">Développé avec ❤️ par KINGSOFT BUSINESS</p>
+            <p style="opacity: 0.5; font-size: 0.85em; margin-top: 10px;">
+                📍 Yaoundé, Cameroun | 📧 kingsoft237@gmail.com | 📱 +237 697 636 355
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
