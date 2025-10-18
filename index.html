@@ -854,7 +854,160 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎬</div>
+            <h1 class="app-title">YT Creator Tools</h1>
+            <p class="app-subtitle">Outils professionnels pour créateurs YouTube</p>
+        </div>
+        
+        <!-- Navigation identique à about.html -->
+        <nav>
+            <a href="/">🏠 Accueil</a>
+            <a href="/about.html">ℹ️ À propos</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/privacy_policy.html">🔒 Confidentialité</a>
+            <a href="/terms.html">📜 CGU</a>
+        </nav>
+        
+        <!-- Zone publicitaire reserveée -->
+        <!--<div class="ad-zone" id="main-ad">
+            <div class="ad-placeholder">
+                📺 Espace publicitaire - Configurez Google AdSense
+            </div>
+        </div>-->
+        
+        <!-- Section d'authentification -->
+        <div class="auth-section">
+            <div class="user-info" id="user-info" style="display: none;">
+                <div class="user-avatar" id="user-avatar">U</div>
+                <div>
+                    <div id="user-name">Utilisateur connecté</div>
+                    <div style="font-size: 0.8em; opacity: 0.7;" id="user-email"></div>
+                </div>
+            </div>
 
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-auth btn-login" onclick="openAuthModal('login')">Se connecter</button>
+                <button class="btn-auth btn-register" onclick="openAuthModal('register')">S'inscrire</button>
+                <button class="btn-auth btn-google" onclick="signInWithGoogle()">
+                    <span>🔴</span> Continuer avec Google
+                </button>
+            </div>
+
+            <div id="logged-in-actions" style="display: none;">
+                <button class="btn-auth btn-logout" onclick="logout()">Se déconnecter</button>
+            </div>
+        </div>
+        
+        <!-- Formulaire principal -->
+        <div class="input-section">
+            <div class="input-group">
+                <label for="youtube-url">🔗 Lien vidéo YouTube</label>
+                <input 
+                    type="url" 
+                    id="youtube-url" 
+                    placeholder="https://www.youtube.com/watch?v=..."
+                    autocomplete="off"
+                >
+            </div>
+            <button class="btn btn-primary" onclick="analyzeVideo()">
+                <span id="btn-text">🚀 Analyser la vidéo</span>
+            </button>
+        </div>
+        
+        <div class="error-message" id="error-message"></div>
+        <div class="success-message" id="success-message"></div>
+        
+        <!-- Zone de chargement -->
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Analyse en cours...</p>
+        </div>
+        
+        <!-- Résultats -->
+        <div class="results-section" id="results-section">
+            <!-- Informations de la vidéo -->
+            <div class="video-info-card">
+                <h2 class="section-title">📋 Métadonnées de la vidéo</h2>
+                <div class="video-title" id="video-title-display">
+                    Titre de la vidéo
+                    <button class="copy-btn" onclick="copyText('video-title-display')">Copier</button>
+                </div>
+                <div class="video-description" id="video-description">
+                    Description de la vidéo...
+                    <button class="copy-btn" onclick="copyText('video-description')">Copier</button>
+                </div>
+                <div class="video-tags" id="video-tags">
+                    <strong>Tags :</strong>
+                    <div id="tags-container"></div>
+                    <button class="copy-btn" onclick="copyTags()">Copier</button>
+                </div>
+            </div>
+            
+            <!-- Miniatures -->
+            <div class="thumbnails-section">
+                <h2 class="section-title">🖼️ Miniatures</h2>
+                <div class="thumbnails-grid" id="thumbnails-grid">
+                    <!-- Les miniatures seront générées ici -->
+                </div>
+            </div>
+            
+            <!-- Sous-titres -->
+            <div class="subtitles-section">
+                <h2 class="section-title">📝 Sous-titres et Scripts</h2>
+                <div id="subtitles-content">
+                    <div class="premium-feature locked" id="subtitles-locked">
+                        <div class="lock-icon">🔒</div>
+                        <h3>Fonctionnalité Premium</h3>
+                        <p>Connectez-vous pour accéder au téléchargement des sous-titres</p>
+                    </div>
+                    <div id="subtitles-available" style="display: none;">
+                        <div style="margin-bottom: 15px; opacity: 0.8;">
+                            <strong>Formats disponibles :</strong>
+                        </div>
+                        <button class="btn-download" onclick="downloadSubtitles('txt')" style="margin-bottom: 10px;">
+                            📄 Télécharger TXT (Texte brut)
+                        </button>
+                        <button class="btn-download" onclick="downloadSubtitles('srt')" style="margin-bottom: 10px;">
+                            🎬 Télécharger SRT (Sous-titres)
+                        </button>
+                        <button class="btn-download" onclick="downloadSubtitles('vtt')" style="margin-bottom: 10px;">
+                            🌐 Télécharger VTT (Web)
+                        </button>
+                        <div style="margin-top: 15px; font-size: 0.9em; opacity: 0.7;">
+                            ℹ️ Les sous-titres sont extraits directement de YouTube. Certaines vidéos peuvent ne pas avoir de sous-titres disponibles.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Réseaux sociaux -->
+        <div class="social-links">
+            <h3>📱 Suivez-nous</h3>
+            <div class="social-icons">
+                <a href="https://youtube.com/@yourchannel" class="social-icon youtube" title="YouTube">📺</a>
+                <a href="https://twitter.com/yourtwitter" class="social-icon twitter" title="Twitter">🦅</a>
+                <a href="https://instagram.com/yourinsta" class="social-icon instagram" title="Instagram">📷</a>
+                <a href="https://tiktok.com/@yourtiktok" class="social-icon tiktok" title="TikTok">🎵</a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <div style="margin-bottom: 20px;">
+                <a href="/">Accueil</a> |
+                <a href="/about.html">À propos</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy_policy.html">Confidentialité</a> |
+                <a href="/terms.html">CGU</a>
+            </div>
+            <p style="opacity: 0.7;">© 2025 YT Creator Tools - Tous droits réservés</p>
+            <p style="opacity: 0.6; font-size: 0.9em;">Développé avec ❤️ par KINGSOFT BUSINESS</p>
+            <p style="opacity: 0.5; font-size: 0.85em; margin-top: 10px;">Yaoundé, Cameroun | +237 697 636 355</p>
+        </footer>
+    </div>
 
     <!-- Modal d'authentification -->
     <div id="auth-modal" class="auth-modal">
