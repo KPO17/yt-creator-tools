@@ -3,388 +3,671 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politique de Confidentialité - YT Thumbnail Downloader</title>
+    <title>Politique de Confidentialité - YT Creator Tools</title>
+    <meta name="description" content="Politique de confidentialité de YT Creator Tools - Protection et sécurité de vos données">
+    <meta name="theme-color" content="#FF0000">
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #FF0000 0%, #282828 50%, #000000 100%);
+            min-height: 100vh;
+            color: white;
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
         }
         
         .container {
-            background: white;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .app-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FF0000, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         h1 {
-            color: #FF0000;
+            font-size: 2.5em;
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2.5em;
+            color: #FF6B6B;
         }
         
         h2 {
-            color: #FF0000;
+            color: #FF6B6B;
+            font-size: 1.8em;
             margin-top: 40px;
             margin-bottom: 20px;
-            border-bottom: 2px solid #FF0000;
             padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.5);
         }
         
         h3 {
-            color: #666;
-            margin-top: 30px;
+            color: #FF8888;
+            margin-top: 25px;
             margin-bottom: 15px;
+            font-size: 1.3em;
         }
         
-        .app-info {
-            background: linear-gradient(135deg, #FF0000, #FF6B6B);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .highlight {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        
-        .contact-info {
-            background: #e3f2fd;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            opacity: 0.95;
         }
         
         ul, ol {
-            padding-left: 30px;
+            margin-left: 30px;
+            margin-bottom: 20px;
         }
         
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            opacity: 0.9;
         }
         
-        .last-updated {
-            text-align: center;
-            color: #666;
-            font-style: italic;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
-        
-        a {
-            color: #FF0000;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .gdpr-section {
-            background: #f0f8ff;
-            padding: 20px;
+        .intro-box {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
             border-left: 4px solid #FF0000;
-            margin: 20px 0;
+        }
+        
+        .highlight-box {
+            background: rgba(255, 200, 0, 0.15);
+            border: 2px solid rgba(255, 200, 0, 0.4);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
         }
         
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 25px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
         }
         
         .data-table th,
         .data-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            padding: 15px;
             text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .data-table th {
-            background-color: #FF0000;
+            background: rgba(255, 0, 0, 0.3);
             color: white;
+            font-weight: 600;
         }
         
-        .data-table tr:nth-child(even) {
-            background-color: #f9f9f9;
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .gdpr-section {
+            background: linear-gradient(135deg, rgba(0, 100, 255, 0.15), rgba(0, 0, 0, 0.3));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 4px solid #4285F4;
+        }
+        
+        .contact-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .info-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+            border-color: #FF0000;
+            background: rgba(255, 0, 0, 0.1);
+        }
+        
+        .info-card h4 {
+            color: #FF6B6B;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        a {
+            color: #FF6B6B;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: #FF8888;
+            text-decoration: underline;
+        }
+        
+        .version-info {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        .checkmark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .crossmark {
+            color: #FF6B6B;
+            font-weight: bold;
+        }
+        
+        /* RESPONSIVE : Tablette */
+        @media (max-width: 900px) {
+            nav {
+                padding: 12px 8px;
+            }
+            
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9em;
+                padding: 5px 8px;
+            }
+        }
+        
+        /* RESPONSIVE : Mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-section {
+                padding: 25px 20px;
+            }
+            
+            nav {
+                padding: 10px 5px;
+                border-radius: 10px;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            nav a {
+                font-size: 0.75em;
+                margin: 0 5px;
+                padding: 5px 8px;
+                white-space: nowrap;
+                display: inline-block;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .data-table {
+                font-size: 0.9em;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 10px;
+            }
+        }
+        
+        /* RESPONSIVE : Très petit mobile */
+        @media (max-width: 480px) {
+            nav {
+                padding: 8px 3px;
+            }
+            
+            nav a {
+                font-size: 0.7em;
+                margin: 0 3px;
+                padding: 4px 6px;
+            }
+            
+            .data-table {
+                font-size: 0.8em;
+            }
+        }
+        
+        /* RESPONSIVE : Mini écran */
+        @media (max-width: 360px) {
+            nav a {
+                font-size: 0.65em;
+                margin: 0 2px;
+                padding: 3px 5px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="app-info">
-            <h1>📱 Politique de Confidentialité</h1>
-            <p><strong>YT Thumbnail Downloader</strong></p>
-            <p>Application de téléchargement de miniatures YouTube</p>
+        <div class="header">
+            <div class="logo">🎬</div>
+            <h1 class="app-title">YT Creator Tools</h1>
         </div>
-
-        <div class="highlight">
-            <strong>⚠️ Important :</strong> Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles lors de l'utilisation de notre application YT Thumbnail Downloader.
-        </div>
-
-        <h2>1. Informations Générales</h2>
         
-        <h3>1.1 Développeur</h3>
-        <ul>
-            <li><strong>Nom de l'application :</strong> YT Thumbnail Downloader</li>
-            <li><strong>Développeur :</strong> KINGSOFT BUSINESS</li>
-            <li><strong>Contact :</strong> kingsoft237@gmail.com</li>
-            <li><strong>Site web :</strong> kingsoftbusiness.com</li>
-            <li><strong>Version :</strong> 1.0.0</li>
-        </ul>
-
-        <h3>1.2 Objet de l'Application</h3>
-        <p>YT Thumbnail Downloader est une application gratuite qui permet aux utilisateurs d'extraire et de télécharger les miniatures des vidéos YouTube en différentes qualités.</p>
-
-        <h2>2. Données Collectées</h2>
-
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Type de Donnée</th>
-                    <th>Collectée</th>
-                    <th>Objectif</th>
-                    <th>Base Légale</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Liens YouTube saisis</td>
-                    <td>Temporairement</td>
-                    <td>Extraction des miniatures</td>
-                    <td>Exécution du service</td>
-                </tr>
-                <tr>
-                    <td>Données d'usage (analytics)</td>
-                    <td>Anonymement</td>
-                    <td>Amélioration de l'app</td>
-                    <td>Intérêt légitime</td>
-                </tr>
-                <tr>
-                    <td>Cookies publicitaires</td>
-                    <td>Avec consentement</td>
-                    <td>Publicités personnalisées</td>
-                    <td>Consentement</td>
-                </tr>
-                <tr>
-                    <td>Données de compte Premium</td>
-                    <td>Si souscription</td>
-                    <td>Gestion abonnement</td>
-                    <td>Exécution du contrat</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>2.1 Données Personnelles</h3>
-        <p><strong>Nous ne collectons PAS :</strong></p>
-        <ul>
-            <li>❌ Nom, prénom, adresse</li>
-            <li>❌ Numéro de téléphone</li>
-            <li>❌ Adresse email (sauf pour Premium)</li>
-            <li>❌ Photos ou vidéos personnelles</li>
-            <li>❌ Contacts ou calendrier</li>
-            <li>❌ Localisation GPS</li>
-        </ul>
-
-        <p><strong>Nous collectons UNIQUEMENT :</strong></p>
-        <ul>
-            <li>✅ Liens YouTube temporairement (pour extraction)</li>
-            <li>✅ Préférences d'utilisation (stockées localement)</li>
-            <li>✅ Données analytiques anonymes</li>
-            <li>✅ Informations techniques (version Android, modèle appareil)</li>
-        </ul>
-
-        <h2>3. Utilisation des Données</h2>
-
-        <h3>3.1 Traitement des Liens YouTube</h3>
-        <ul>
-            <li>Les liens YouTube sont traités <strong>uniquement</strong> pour extraire les miniatures</li>
-            <li>Aucune sauvegarde permanente des liens</li>
-            <li>Traitement effectué côté client (sur votre appareil)</li>
-            <li>Pas de transmission à des tiers</li>
-        </ul>
-
-        <h3>3.2 Données Analytiques</h3>
-        <ul>
-            <li>Collecte anonyme via Google Analytics</li>
-            <li>Objectif : améliorer l'expérience utilisateur</li>
-            <li>Données agrégées (nombre d'utilisateurs, pages vues, etc.)</li>
-            <li>Possibilité de désactiver dans les paramètres</li>
-        </ul>
-
-        <h3>3.3 Publicités</h3>
-        <ul>
-            <li>Affichage de publicités via Google AdSense</li>
-            <li>Cookies publicitaires avec votre consentement</li>
-            <li>Possibilité de personnalisation des annonces</li>
-            <li>Option Premium sans publicité disponible</li>
-        </ul>
-
-        <h2>4. Stockage et Sécurité</h2>
-
-        <h3>4.1 Stockage Local</h3>
-        <ul>
-            <li>Préférences stockées localement sur votre appareil</li>
-            <li>Historique d'utilisation (optionnel, suppressible)</li>
-            <li>Pas de synchronisation cloud par défaut</li>
-        </ul>
-
-        <h3>4.2 Sécurité</h3>
-        <ul>
-            <li>Chiffrement des données sensibles</li>
-            <li>Connexions HTTPS sécurisées</li>
-            <li>Mise à jour régulière des composants de sécurité</li>
-            <li>Respect des standards de sécurité Android</li>
-        </ul>
-
-        <div class="gdpr-section">
-            <h2>5. Droits RGPD (Utilisateurs Européens)</h2>
-            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+        <nav>
+            <a href="/">🏠 Accueil</a>
+            <a href="/about.html">ℹ️ À propos</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/privacy_policy.html">🔒 Confidentialité</a>
+            <a href="/terms.html">📜 CGU</a>
+        </nav>
+        
+        <div class="content-section">
+            <h1>🔒 Politique de Confidentialité</h1>
             
-            <h3>5.1 Vos Droits</h3>
+            <div class="intro-box">
+                <p><strong>⚠️ Important :</strong> Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles lors de l'utilisation de YT Creator Tools.</p>
+            </div>
+            
+            <h2>1. Informations Générales</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>📱 Application</h4>
+                    <p>YT Creator Tools</p>
+                </div>
+                <div class="info-card">
+                    <h4>🏢 Développeur</h4>
+                    <p>KINGSOFT BUSINESS</p>
+                </div>
+                <div class="info-card">
+                    <h4>📧 Contact</h4>
+                    <p><a href="mailto:kingsoft237@gmail.com">kingsoft237@gmail.com</a></p>
+                </div>
+                <div class="info-card">
+                    <h4>🌐 Site Web</h4>
+                    <p><a href="https://kingsoftbusiness.com" target="_blank">kingsoftbusiness.com</a></p>
+                </div>
+            </div>
+            
+            <h3>1.2 Objet de l'Application</h3>
+            <p>YT Creator Tools est une application gratuite qui permet aux créateurs YouTube d'extraire des métadonnées, télécharger des miniatures et récupérer des sous-titres de vidéos YouTube en différentes qualités et formats.</p>
+            
+            <h2>2. Données Collectées</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Type de Donnée</th>
+                        <th>Collectée</th>
+                        <th>Objectif</th>
+                        <th>Base Légale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Liens YouTube saisis</td>
+                        <td>Temporairement</td>
+                        <td>Extraction des données</td>
+                        <td>Exécution du service</td>
+                    </tr>
+                    <tr>
+                        <td>Données d'usage (analytics)</td>
+                        <td>Anonymement</td>
+                        <td>Amélioration de l'app</td>
+                        <td>Intérêt légitime</td>
+                    </tr>
+                    <tr>
+                        <td>Cookies publicitaires</td>
+                        <td>Avec consentement</td>
+                        <td>Publicités personnalisées</td>
+                        <td>Consentement</td>
+                    </tr>
+                    <tr>
+                        <td>Compte utilisateur</td>
+                        <td>Si connexion</td>
+                        <td>Authentification</td>
+                        <td>Exécution du contrat</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>2.1 Données Personnelles</h3>
+            <div class="highlight-box">
+                <p><strong>Nous ne collectons PAS :</strong></p>
+                <ul>
+                    <li><span class="crossmark">❌</span> Nom, prénom, adresse</li>
+                    <li><span class="crossmark">❌</span> Numéro de téléphone</li>
+                    <li><span class="crossmark">❌</span> Photos ou vidéos personnelles</li>
+                    <li><span class="crossmark">❌</span> Contacts ou calendrier</li>
+                    <li><span class="crossmark">❌</span> Localisation GPS</li>
+                </ul>
+            </div>
+            
+            <p><strong>Nous collectons UNIQUEMENT :</strong></p>
             <ul>
-                <li><strong>Droit d'accès :</strong> Consulter vos données personnelles</li>
-                <li><strong>Droit de rectification :</strong> Corriger des données inexactes</li>
-                <li><strong>Droit à l'effacement :</strong> Supprimer vos données</li>
-                <li><strong>Droit à la portabilité :</strong> Récupérer vos données</li>
-                <li><strong>Droit d'opposition :</strong> S'opposer au traitement</li>
-                <li><strong>Droit de limitation :</strong> Limiter le traitement</li>
+                <li><span class="checkmark">✅</span> Liens YouTube temporairement (pour extraction)</li>
+                <li><span class="checkmark">✅</span> Préférences d'utilisation (stockées localement)</li>
+                <li><span class="checkmark">✅</span> Données analytiques anonymes</li>
+                <li><span class="checkmark">✅</span> Informations techniques (version navigateur, système d'exploitation)</li>
+                <li><span class="checkmark">✅</span> Email (uniquement si vous vous connectez avec Google)</li>
             </ul>
-
-            <h3>5.2 Exercer vos Droits</h3>
-            <p>Pour exercer vos droits, contactez-nous à : <strong>[VOTRE EMAIL]</strong></p>
-            <p>Délai de réponse : 30 jours maximum</p>
-        </div>
-
-        <h2>6. Partage avec des Tiers</h2>
-
-        <h3>6.1 Services Tiers Utilisés</h3>
-        <ul>
-            <li><strong>Google AdSense :</strong> Diffusion de publicités
-                <br><small>Politique : <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></small>
-            </li>
-            <li><strong>Google Analytics :</strong> Analyses d'audience
-                <br><small>Politique : <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></small>
-            </li>
-            <li><strong>Google Play Services :</strong> Services Android
-                <br><small>Politique : <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></small>
-            </li>
-        </ul>
-
-        <h3>6.2 Pas de Vente de Données</h3>
-        <div class="highlight">
-            <strong>Engagement :</strong> Nous ne vendons, ne louons et ne partageons jamais vos données personnelles à des fins commerciales avec des tiers non autorisés.
-        </div>
-
-        <h2>7. Données des Mineurs</h2>
-
-        <h3>7.1 Restriction d'Âge</h3>
-        <ul>
-            <li>Cette application est destinée aux utilisateurs de <strong>13 ans et plus</strong></li>
-            <li>Nous ne collectons pas sciemment de données d'enfants de moins de 13 ans</li>
-            <li>Si vous êtes mineur, demandez l'autorisation parentale avant utilisation</li>
-        </ul>
-
-        <h3>7.2 Découverte de Données de Mineurs</h3>
-        <p>Si nous découvrons que nous avons collecté des données d'un enfant de moins de 13 ans sans consentement parental, nous supprimerons immédiatement ces informations.</p>
-
-        <h2>8. Cookies et Technologies Similaires</h2>
-
-        <h3>8.1 Types de Cookies</h3>
-        <ul>
-            <li><strong>Cookies essentiels :</strong> Fonctionnement de l'application</li>
-            <li><strong>Cookies analytiques :</strong> Amélioration des services</li>
-            <li><strong>Cookies publicitaires :</strong> Personnalisation des annonces</li>
-        </ul>
-
-        <h3>8.2 Gestion des Cookies</h3>
-        <p>Vous pouvez gérer vos préférences de cookies dans les paramètres de l'application ou de votre navigateur.</p>
-
-        <h2>9. Transferts Internationaux</h2>
-        <p>Vos données peuvent être transférées et traitées dans des pays autres que votre pays de résidence, notamment aux États-Unis (serveurs Google). Ces transferts sont effectués conformément aux garanties appropriées du RGPD.</p>
-
-        <h2>10. Conservation des Données</h2>
-
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Type de Donnée</th>
-                    <th>Durée de Conservation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Liens YouTube traités</td>
-                    <td>Immédiatement supprimés après traitement</td>
-                </tr>
-                <tr>
-                    <td>Données analytiques</td>
-                    <td>26 mois (Google Analytics)</td>
-                </tr>
-                <tr>
-                    <td>Préférences utilisateur</td>
-                    <td>Jusqu'à désinstallation de l'app</td>
-                </tr>
-                <tr>
-                    <td>Données compte Premium</td>
-                    <td>Durée de l'abonnement + 3 ans</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>11. Modifications de cette Politique</h2>
-        <ul>
-            <li>Cette politique peut être mise à jour périodiquement</li>
-            <li>Notification des changements importants dans l'application</li>
-            <li>Consultation recommandée régulièrement</li>
-            <li>Version actuelle toujours disponible dans l'application</li>
-        </ul>
-
-        <h2>12. Contact et Réclamations</h2>
-
-        <div class="contact-info">
-            <h3>12.1 Nous Contacter</h3>
-            <p><strong>Email :</strong> <a href="mailto:privacy@ytthumbnail.com">privacy@ytthumbnail.com</a></p>
-            <p><strong>Adresse :</strong> [VOTRE ADRESSE POSTALE]</p>
-            <p><strong>Réponse :</strong> Sous 48h en moyenne</p>
-
-            <h3>12.2 Autorité de Contrôle</h3>
-            <p>Si vous résidez dans l'UE et souhaitez déposer une réclamation concernant notre traitement de vos données personnelles, vous pouvez contacter votre autorité de protection des données locale.</p>
             
-            <p><strong>France :</strong> Commission Nationale de l'Informatique et des Libertés (CNIL)<br>
-            Site : <a href="https://www.cnil.fr">www.cnil.fr</a></p>
-        </div>
-
-        <h2>13. Consentement</h2>
-        <div class="highlight">
-            <p><strong>En utilisant YT Thumbnail Downloader, vous acceptez cette politique de confidentialité et consentez au traitement de vos données tel que décrit ci-dessus.</strong></p>
+            <h2>3. Utilisation des Données</h2>
             
-            <p>Vous pouvez retirer votre consentement à tout moment en :</p>
+            <h3>3.1 Traitement des Liens YouTube</h3>
             <ul>
-                <li>Désinstallant l'application</li>
-                <li>Modifiant les paramètres de confidentialité</li>
-                <li>Nous contactant directement</li>
+                <li>Les liens YouTube sont traités <strong>uniquement</strong> pour extraire les métadonnées et sous-titres</li>
+                <li>Aucune sauvegarde permanente des liens</li>
+                <li>Traitement effectué côté client (sur votre navigateur)</li>
+                <li>Pas de transmission à des tiers</li>
             </ul>
+            
+            <h3>3.2 Données Analytiques</h3>
+            <ul>
+                <li>Collecte anonyme via Google Analytics</li>
+                <li>Objectif : améliorer l'expérience utilisateur</li>
+                <li>Données agrégées (nombre d'utilisateurs, pages vues, etc.)</li>
+                <li>Possibilité de désactiver dans les paramètres du navigateur</li>
+            </ul>
+            
+            <h3>3.3 Publicités</h3>
+            <ul>
+                <li>Affichage de publicités via Google AdSense</li>
+                <li>Cookies publicitaires avec votre consentement</li>
+                <li>Possibilité de personnalisation des annonces</li>
+            </ul>
+            
+            <h2>4. Stockage et Sécurité</h2>
+            
+            <h3>4.1 Stockage Local</h3>
+            <ul>
+                <li>Préférences stockées localement sur votre navigateur</li>
+                <li>Historique d'utilisation (optionnel, suppressible)</li>
+                <li>Pas de synchronisation cloud par défaut</li>
+            </ul>
+            
+            <h3>4.2 Sécurité</h3>
+            <ul>
+                <li>Chiffrement des données sensibles</li>
+                <li>Connexions HTTPS sécurisées</li>
+                <li>Mise à jour régulière des composants de sécurité</li>
+                <li>Respect des standards de sécurité web</li>
+            </ul>
+            
+            <div class="gdpr-section">
+                <h2>5. Droits RGPD (Utilisateurs Européens)</h2>
+                <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+                
+                <h3>5.1 Vos Droits</h3>
+                <ul>
+                    <li><strong>Droit d'accès :</strong> Consulter vos données personnelles</li>
+                    <li><strong>Droit de rectification :</strong> Corriger des données inexactes</li>
+                    <li><strong>Droit à l'effacement :</strong> Supprimer vos données</li>
+                    <li><strong>Droit à la portabilité :</strong> Récupérer vos données</li>
+                    <li><strong>Droit d'opposition :</strong> S'opposer au traitement</li>
+                    <li><strong>Droit de limitation :</strong> Limiter le traitement</li>
+                </ul>
+                
+                <h3>5.2 Exercer vos Droits</h3>
+                <p>Pour exercer vos droits, contactez-nous à : <strong><a href="mailto:kingsoft237@gmail.com">kingsoft237@gmail.com</a></strong></p>
+                <p>Délai de réponse : 30 jours maximum</p>
+            </div>
+            
+            <h2>6. Partage avec des Tiers</h2>
+            
+            <h3>6.1 Services Tiers Utilisés</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Google AdSense</h4>
+                    <p>Diffusion de publicités</p>
+                    <small><a href="https://policies.google.com/privacy" target="_blank">Politique de confidentialité</a></small>
+                </div>
+                <div class="info-card">
+                    <h4>Google Analytics</h4>
+                    <p>Analyses d'audience</p>
+                    <small><a href="https://policies.google.com/privacy" target="_blank">Politique de confidentialité</a></small>
+                </div>
+                <div class="info-card">
+                    <h4>Firebase Authentication</h4>
+                    <p>Authentification sécurisée</p>
+                    <small><a href="https://policies.google.com/privacy" target="_blank">Politique de confidentialité</a></small>
+                </div>
+            </div>
+            
+            <h3>6.2 Pas de Vente de Données</h3>
+            <div class="highlight-box">
+                <p><strong>🛡️ Engagement :</strong> Nous ne vendons, ne louons et ne partageons jamais vos données personnelles à des fins commerciales avec des tiers non autorisés.</p>
+            </div>
+            
+            <h2>7. Données des Mineurs</h2>
+            
+            <h3>7.1 Restriction d'Âge</h3>
+            <ul>
+                <li>Cette application est destinée aux utilisateurs de <strong>13 ans et plus</strong></li>
+                <li>Nous ne collectons pas sciemment de données d'enfants de moins de 13 ans</li>
+                <li>Si vous êtes mineur, demandez l'autorisation parentale avant utilisation</li>
+            </ul>
+            
+            <h3>7.2 Découverte de Données de Mineurs</h3>
+            <p>Si nous découvrons que nous avons collecté des données d'un enfant de moins de 13 ans sans consentement parental, nous supprimerons immédiatement ces informations.</p>
+            
+            <h2>8. Cookies et Technologies Similaires</h2>
+            
+            <h3>8.1 Types de Cookies</h3>
+            <ul>
+                <li><strong>Cookies essentiels :</strong> Fonctionnement de l'application</li>
+                <li><strong>Cookies analytiques :</strong> Amélioration des services</li>
+                <li><strong>Cookies publicitaires :</strong> Personnalisation des annonces</li>
+            </ul>
+            
+            <h3>8.2 Gestion des Cookies</h3>
+            <p>Vous pouvez gérer vos préférences de cookies dans les paramètres de votre navigateur.</p>
+            
+            <h2>9. Transferts Internationaux</h2>
+            <p>Vos données peuvent être transférées et traitées dans des pays autres que votre pays de résidence, notamment aux États-Unis (serveurs Google). Ces transferts sont effectués conformément aux garanties appropriées du RGPD.</p>
+            
+            <h2>10. Conservation des Données</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Type de Donnée</th>
+                        <th>Durée de Conservation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Liens YouTube traités</td>
+                        <td>Immédiatement supprimés après traitement</td>
+                    </tr>
+                    <tr>
+                        <td>Données analytiques</td>
+                        <td>26 mois (Google Analytics)</td>
+                    </tr>
+                    <tr>
+                        <td>Préférences utilisateur</td>
+                        <td>Jusqu'à suppression du cache navigateur</td>
+                    </tr>
+                    <tr>
+                        <td>Données compte utilisateur</td>
+                        <td>Durée d'utilisation du service + 3 ans</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>11. Modifications de cette Politique</h2>
+            <ul>
+                <li>Cette politique peut être mise à jour périodiquement</li>
+                <li>Notification des changements importants sur l'application</li>
+                <li>Consultation recommandée régulièrement</li>
+                <li>Version actuelle toujours disponible sur ce site</li>
+            </ul>
+            
+            <h2>12. Contact et Réclamations</h2>
+            
+            <div class="contact-box">
+                <h3>12.1 Nous Contacter</h3>
+                <div class="info-grid">
+                    <div>
+                        <p><strong>📧 Email :</strong></p>
+                        <p><a href="mailto:kingsoft237@gmail.com">kingsoft237@gmail.com</a></p>
+                    </div>
+                    <div>
+                        <p><strong>📱 WhatsApp :</strong></p>
+                        <p><a href="https://wa.me/237697636355" target="_blank">+237 697 636 355</a></p>
+                    </div>
+                    <div>
+                        <p><strong>📍 Adresse :</strong></p>
+                        <p>Douala, Littoral, Cameroun</p>
+                    </div>
+                    <div>
+                        <p><strong>⏱️ Réponse :</strong></p>
+                        <p>Sous 24-48h en moyenne</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 30px;">12.2 Autorité de Contrôle</h3>
+                <p>Si vous résidez dans l'UE et souhaitez déposer une réclamation concernant notre traitement de vos données personnelles, vous pouvez contacter votre autorité de protection des données locale.</p>
+                
+                <p><strong>France :</strong> Commission Nationale de l'Informatique et des Libertés (CNIL)<br>
+                Site : <a href="https://www.cnil.fr" target="_blank">www.cnil.fr</a></p>
+            </div>
+            
+            <h2>13. Consentement</h2>
+            <div class="highlight-box">
+                <p><strong>✅ En utilisant YT Creator Tools, vous acceptez cette politique de confidentialité et consentez au traitement de vos données tel que décrit ci-dessus.</strong></p>
+                
+                <p>Vous pouvez retirer votre consentement à tout moment en :</p>
+                <ul>
+                    <li>Supprimant les cookies de votre navigateur</li>
+                    <li>Modifiant les paramètres de confidentialité</li>
+                    <li>Nous contactant directement</li>
+                </ul>
+            </div>
+            
+            <div class="version-info">
+                <p><strong>📅 Dernière mise à jour :</strong> Janvier 2025</p>
+                <p><strong>📌 Version :</strong> 1.0</p>
+                <p><strong>🌍 Langue :</strong> Français</p>
+            </div>
         </div>
-
-        <div class="last-updated">
-            <p><strong>Dernière mise à jour :</strong> [DATE ACTUELLE]</p>
-            <p><strong>Version :</strong> 1.0</p>
-            <p><strong>Langue :</strong> Français</p>
-        </div>
+        
+        <footer>
+            <div style="margin-bottom: 20px;">
+                <a href="/">Accueil</a> |
+                <a href="/about.html">À propos</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy_policy.html">Confidentialité</a> |
+                <a href="/terms.html">CGU</a>
+            </div>
+            <p style="opacity: 0.7;">© 2025 YT Creator Tools - Tous droits réservés</p>
+            <p style="opacity: 0.6; font-size: 0.9em;">Développé avec ❤️ par KINGSOFT BUSINESS</p>
+            <p style="opacity: 0.5; font-size: 0.85em; margin-top: 10px;">
+                📍 Douala, Cameroun | 📧 kingsoft237@gmail.com | 📱 +237 697 636 355
+            </p>
+        </footer>
     </div>
 </body>
 </html>
