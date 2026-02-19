@@ -25,6 +25,11 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             'no_warnings': True,
             'socket_timeout': 30,
             'extract_flat': False,
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['tv_downgraded', 'android'],
+                }
+            },
         }
         
         # Gestion des cookies
@@ -196,11 +201,16 @@ def get_available_languages(video_id):
     """Récupère la liste des langues disponibles"""
     try:
         url = f'https://www.youtube.com/watch?v={video_id}'
-        
+
         ydl_opts = {
             'skip_download': True,
             'quiet': True,
             'no_warnings': True,
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['tv_downgraded', 'android'],
+                }
+            },
         }
         
         # Ajouter les cookies si disponibles
