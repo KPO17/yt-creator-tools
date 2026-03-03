@@ -1,13 +1,18 @@
 services:
-  # Service Web (Backend Flask + Frontend statique)
   - type: web
     name: yt-creator-tools
     env: python
-    region: frankfurt  # ou oregon, singapore selon votre localisation
-    plan: free  # Gratuit pour commencer
-    buildCommand: "pip install -r api/requirements.txt"
-    startCommand: "gunicorn -w 4 -b 0.0.0.0:$PORT api.app:app"
-    
+    region: frankfurt
+    plan: free
+    buildCommand: |
+      curl -fsSL https://deno.land/install.sh | sh
+      export DENO_INSTALL="/opt/render/.deno"
+      export PATH="$DENO_INSTALL/bin:$PATH"
+      pip install -r api/requirements.txt
+    startCommand: |
+      export DENO_INSTALL="/opt/render/.deno"
+      export PATH="$DENO_INSTALL/bin:$PATH"
+      gunicorn -w 4 -b 0.0.0.0:$PORT api.app:app
     envVars:
       - key: FLASK_ENV
         value: production
@@ -15,23 +20,5 @@ services:
         value: 3.11.0
       - key: PORT
         generateValue: true
-    
-    # Configuration santé
-    healthCheckPath: /api/health
-    
-    # Headers de sécurité
-    headers:
-      - path: /*
-        name: X-Frame-Options
-        value: DENY
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      - path: /*
-        name: Referrer-Policy
-        value: strict-origin-when-cross-origin
-    
-    # Domaines personnalisés (optionnel)
-    # domains:
-    #   - ytcreatortools.com
-    #   - www.ytcreatortools.com
+      - key: DENO_INSTALL
+        value: /opt/render/.deno
