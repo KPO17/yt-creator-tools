@@ -6,12 +6,24 @@ import tempfile
 import urllib.request
 import xml.etree.ElementTree as ET
 
-print("\u2705 Module subtitles charg\u00e9 avec support cookies")
+print("✅ Module subtitles chargé avec support cookies")
 
 
 class SubtitleError(Exception):
-    """Exception personnalis\u00e9e pour les erreurs de sous-titres"""
+    """Exception personnalisée pour les erreurs de sous-titres"""
     pass
+
+
+# ==================== PROXY ====================
+
+def setup_proxy():
+    """Configure le proxy résidentiel Webshare depuis la variable d'environnement."""
+    proxy = os.getenv('WEBSHARE_PROXY')
+    if proxy:
+        print("✅ Proxy résidentiel Webshare configuré")
+        return proxy
+    print("⚠️  Aucun proxy configuré - mode direct")
+    return None
 
 
 # ==================== COOKIES ====================
@@ -24,14 +36,14 @@ def setup_cookies():
             with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
                 f.write(cookies_env)
                 cookies_path = f.name
-            print(f"\u2705 Cookies charg\u00e9s depuis variable d'environnement: {cookies_path}")
+            print(f"✅ Cookies chargés depuis variable d'environnement: {cookies_path}")
             return cookies_path
         except Exception as e:
-            print(f"\u274c Erreur cr\u00e9ation fichier cookies: {e}")
+            print(f"❌ Erreur création fichier cookies: {e}")
 
     for candidate in ['cookies.txt', os.path.join(os.path.dirname(__file__), 'cookies.txt')]:
         if os.path.exists(candidate):
-            print(f"\u2705 Cookies trouv\u00e9s: {candidate}")
+            print(f"✅ Cookies trouvés: {candidate}")
             return candidate
 
     return None
@@ -43,8 +55,8 @@ def get_ydl_base_opts():
     """
     Options yt-dlp communes (2026).
     - android_vr  : client principal, sans PO Token requis
-    - web_embedded: fallback pour la majorit\u00e9 des vid\u00e9os publiques
-    Avec Deno install\u00e9 (render.yaml), tous les formats sont disponibles.
+    - web_embedded: fallback pour la majorité des vidéos publiques
+    Avec Deno installé (render.yaml), tous les formats sont disponibles.
     """
     opts = {
         'skip_download': True,
@@ -58,6 +70,11 @@ def get_ydl_base_opts():
         },
     }
 
+    # Proxy résidentiel Webshare
+    proxy = setup_proxy()
+    if proxy:
+        opts['proxy'] = proxy
+
     deno_paths = [
         '/opt/render/.deno/bin/deno',
         os.path.expanduser('~/.deno/bin/deno'),
@@ -67,7 +84,7 @@ def get_ydl_base_opts():
     for deno_path in deno_paths:
         if os.path.isfile(deno_path):
             opts['js_runtimes'] = {'deno': {'path': deno_path}}
-            print(f"\u2705 Deno d\u00e9tect\u00e9: {deno_path}")
+            print(f"✅ Deno détecté: {deno_path}")
             break
 
     return opts
@@ -76,8 +93,8 @@ def get_ydl_base_opts():
 # ==================== LANGUES ====================
 
 def get_available_languages(video_id):
-    """R\u00e9cup\u00e8re la liste des langues de sous-titres disponibles."""
-    print(f"\U0001f50d Recherche des langues disponibles pour: {video_id}")
+    """Récupère la liste des langues de sous-titres disponibles."""
+    print(f"🔍 Recherche des langues disponibles pour: {video_id}")
     try:
         url = f'https://www.youtube.com/watch?v={video_id}'
         ydl_opts = get_ydl_base_opts()
@@ -93,7 +110,7 @@ def get_available_languages(video_id):
         automatic_captions = info.get('automatic_captions', {})
 
         if not subtitles and not automatic_captions:
-            raise SubtitleError('Aucun sous-titre disponible pour cette vid\u00e9o')
+            raise SubtitleError('Aucun sous-titre disponible pour cette vidéo')
 
         languages = []
 
@@ -114,7 +131,7 @@ def get_available_languages(video_id):
                     'isTranslatable': True
                 })
 
-        print(f"\u2705 {len(languages)} langues trouv\u00e9es")
+        print(f"✅ {len(languages)} langues trouvées")
         return languages
 
     except SubtitleError:
@@ -122,9 +139,9 @@ def get_available_languages(video_id):
     except yt_dlp.utils.DownloadError as e:
         error_msg = str(e)
         if 'Sign in to confirm' in error_msg:
-            raise SubtitleError('Blocage anti-bot d\u00e9tect\u00e9 - cookies requis')
+            raise SubtitleError('Blocage anti-bot détecté - cookies requis')
         if 'Video unavailable' in error_msg:
-            raise SubtitleError('Vid\u00e9o non disponible')
+            raise SubtitleError('Vidéo non disponible')
         raise SubtitleError(f'Erreur yt-dlp : {error_msg}')
     except Exception as e:
         raise SubtitleError(f'Erreur inattendue : {type(e).__name__} - {str(e)}')
@@ -134,7 +151,7 @@ def get_available_languages(video_id):
 
 def get_subtitles(video_id, format_type='txt', language='fr'):
     """
-    R\u00e9cup\u00e8re et formate les sous-titres d'une vid\u00e9o YouTube.
+    Récupère et formate les sous-titres d'une vidéo YouTube.
 
     Args:
         video_id   : ID YouTube (ex: 'dQw4w9WgXcQ')
@@ -144,7 +161,7 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
     Returns:
         dict avec 'content', 'language', 'format', 'lineCount', 'isAutoGenerated'
     """
-    print(f"\U0001f3af Demande de sous-titres avec cookies: {video_id}")
+    print(f"🎯 Demande de sous-titres avec cookies: {video_id}")
 
     try:
         url = f'https://www.youtube.com/watch?v={video_id}'
@@ -159,9 +176,9 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
         cookies_file = setup_cookies()
         if cookies_file:
             ydl_opts['cookiefile'] = cookies_file
-            print(f"\u2705 Utilisation des cookies: {cookies_file}")
+            print(f"✅ Utilisation des cookies: {cookies_file}")
         else:
-            print("\u26a0\ufe0f  Aucun cookie disponible - mode sans authentification")
+            print("⚠️  Aucun cookie disponible - mode sans authentification")
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
@@ -171,9 +188,9 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
         all_subs = {**automatic_captions, **subtitles}
 
         if not all_subs:
-            raise SubtitleError('Aucun sous-titre disponible pour cette vid\u00e9o')
+            raise SubtitleError('Aucun sous-titre disponible pour cette vidéo')
 
-        # S\u00e9lection de la langue
+        # Sélection de la langue
         selected_lang = None
         is_auto = False
         subtitle_data = None
@@ -192,7 +209,7 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             is_auto = selected_lang in automatic_captions
 
         if not subtitle_data:
-            raise SubtitleError('Donn\u00e9es de sous-titres vides pour cette langue')
+            raise SubtitleError('Données de sous-titres vides pour cette langue')
 
         # Meilleur format disponible
         chosen_fmt = None
@@ -206,9 +223,9 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
         if not chosen_fmt:
             chosen_fmt = subtitle_data[0]
 
-        print(f"\U0001f4e5 T\u00e9l\u00e9chargement [{selected_lang}] format [{chosen_fmt.get('ext')}]")
+        print(f"📥 Téléchargement [{selected_lang}] format [{chosen_fmt.get('ext')}]")
 
-        # T\u00e9l\u00e9chargement
+        # Téléchargement
         try:
             req = urllib.request.Request(
                 chosen_fmt['url'],
@@ -217,7 +234,7 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             response = urllib.request.urlopen(req, timeout=15)
             raw_content = response.read().decode('utf-8')
         except Exception as e:
-            raise SubtitleError(f'Impossible de t\u00e9l\u00e9charger le fichier de sous-titres : {e}')
+            raise SubtitleError(f'Impossible de télécharger le fichier de sous-titres : {e}')
 
         # Parsing
         transcript_data = []
@@ -227,7 +244,7 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             try:
                 transcript_data = parse_youtube_json(json.loads(raw_content))
             except Exception as e:
-                print(f"\u26a0\ufe0f  Parsing JSON3 \u00e9chou\u00e9 ({e}), tentative XML...")
+                print(f"⚠️  Parsing JSON3 échoué ({e}), tentative XML...")
 
         if not transcript_data:
             transcript_data = parse_xml_subtitles(raw_content)
@@ -235,7 +252,7 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
         if not transcript_data:
             raise SubtitleError('Impossible de parser le contenu des sous-titres')
 
-        print(f"\u2705 {len(transcript_data)} segments pars\u00e9s")
+        print(f"✅ {len(transcript_data)} segments parsés")
 
         # Formatage
         if format_type == 'srt':
@@ -252,17 +269,17 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
             'content': content,
             'lineCount': len(transcript_data),
             'isAutoGenerated': is_auto,
-            'method': 'yt-dlp_2026'
+            'method': 'yt-dlp_2026_proxy'
         }
 
     except yt_dlp.utils.DownloadError as e:
         error_msg = str(e)
         if 'Video unavailable' in error_msg:
-            raise SubtitleError('Vid\u00e9o non disponible')
+            raise SubtitleError('Vidéo non disponible')
         if 'Sign in to confirm' in error_msg:
-            raise SubtitleError('Blocage anti-bot d\u00e9tect\u00e9 - cookies n\u00e9cessaires')
+            raise SubtitleError('Blocage anti-bot détecté - cookies nécessaires')
         if 'Requested format is not available' in error_msg:
-            raise SubtitleError('Aucun format de sous-titres disponible pour cette vid\u00e9o')
+            raise SubtitleError('Aucun format de sous-titres disponible pour cette vidéo')
         raise SubtitleError(f'Erreur yt-dlp : {error_msg}')
 
     except SubtitleError:
@@ -270,7 +287,7 @@ def get_subtitles(video_id, format_type='txt', language='fr'):
 
     except Exception as e:
         import traceback
-        print(f"\u274c Erreur inattendue:\n{traceback.format_exc()}")
+        print(f"❌ Erreur inattendue:\n{traceback.format_exc()}")
         raise SubtitleError(f'Erreur : {type(e).__name__} - {str(e)}')
 
 
@@ -289,7 +306,7 @@ def parse_youtube_json(json_data):
             if text and text != '\n':
                 transcript.append({'text': text, 'start': start, 'duration': duration})
     except Exception as e:
-        print(f"\u26a0\ufe0f  Erreur parse JSON3 : {e}")
+        print(f"⚠️  Erreur parse JSON3 : {e}")
     return transcript
 
 
@@ -299,11 +316,11 @@ def parse_xml_subtitles(xml_content):
     try:
         xml_content = (xml_content.strip()
                        .replace('&amp;', '&').replace('&lt;', '<')
-                       .replace('&gt;', '>').replace('&quot;', '"'). replace('&#39;', "'"))
+                       .replace('&gt;', '>').replace('&quot;', '"').replace('&#39;', "'"))
         try:
             root = ET.fromstring(xml_content)
         except ET.ParseError as e:
-            print(f"\u26a0\ufe0f  XML parse error ({e}), tentative VTT...")
+            print(f"⚠️  XML parse error ({e}), tentative VTT...")
             return parse_vtt_fallback(xml_content)
 
         for element in root.iter():
@@ -331,7 +348,7 @@ def parse_xml_subtitles(xml_content):
             transcript.append({'text': text, 'start': start, 'duration': duration})
 
     except Exception as e:
-        print(f"\u26a0\ufe0f  Erreur parse XML : {e}")
+        print(f"⚠️  Erreur parse XML : {e}")
         transcript = parse_vtt_fallback(xml_content)
 
     return transcript
@@ -353,7 +370,7 @@ def parse_vtt_fallback(content):
                 e = parse_timestamp(end_str)
                 transcript.append({'text': text, 'start': s, 'duration': max(0.0, e - s)})
     except Exception as e:
-        print(f"\u26a0\ufe0f  Erreur parse VTT fallback : {e}")
+        print(f"⚠️  Erreur parse VTT fallback : {e}")
     return transcript
 
 
